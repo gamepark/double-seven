@@ -1,3 +1,3 @@
-export { GameTemplateRules } from './GameTemplateRules'
-export { GameTemplateOptionsSpec } from './GameTemplateOptions'
-export { GameTemplateSetup } from './GameTemplateSetup'
+export { DoubleSevenRules } from './DoubleSevenRules'
+export { DoubleSevenOptionsSpec } from './DoubleSevenOptions'
+export { DoubleSevenSetup } from './DoubleSevenSetup'
