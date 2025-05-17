@@ -1,3 +1,11 @@
 export enum RuleId {
-  TheFirstStep = 1
+  ChooseFirstTiles = 1,
+  FlipTile,
+  ChooseTwoTiles,
+  ChooseThreeTiles,
+  DeclareRainbow,
+  ChooseTileAfterRainbow,
+  DoActions,
+  TwoForOneAction,
+  DiscardTile
 }
