@@ -18,9 +18,7 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
     //const playerTilesInRack = rules.material(MaterialType.Tile).location(LocationType.PlayerTilesInRack).player(player)
 
     return legalMoves.filter((move: MaterialMove) => {
-      return (
-        (isMoveItemType(MaterialType.Tile)(move) && (move.location.player === player || move.location.player === undefined)) || isCustomMove(move)
-      )
+      return (isMoveItemType(MaterialType.Tile)(move) && (move.location.player === player || move.location.player === undefined)) || isCustomMove(move)
     })
   }
 }

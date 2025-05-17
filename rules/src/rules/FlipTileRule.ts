@@ -5,7 +5,7 @@ import { RuleId } from './RuleId'
 
 export class FlipTileRule extends PlayerTurnRule {
   onRuleStart(): MaterialMove[] {
-    if(this.tilesInPile.length === 0) {
+    if (this.tilesInPile.length === 0) {
       return [this.startRule(this.getNextRule())]
     }
     return []

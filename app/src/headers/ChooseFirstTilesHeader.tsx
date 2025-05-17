@@ -9,9 +9,7 @@ export const ChooseFirstTilesHeader = () => {
   const activePlayers = useRules<DoubleSevenRules>()?.game.rule?.players ?? []
   const player = usePlayerName(activePlayers[0])
   if (playerId !== undefined && activePlayers.includes(playerId)) {
-    return (
-      <Trans defaults="header.choose.first.tiles.you" />
-    )
+    return <Trans defaults="header.choose.first.tiles.you" />
   } else if (activePlayers.length === 1) {
     return <>{t('header.choose.first.tiles.player', { player })}</>
   } else {

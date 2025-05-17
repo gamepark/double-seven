@@ -42,11 +42,7 @@ export class TileDescription extends CardDescription {
   }
 
   isDiscardTileMove(move: MaterialMove, context: ItemContext) {
-    return (
-      isMoveItemType(MaterialType.Tile)(move) &&
-      move.location.type === LocationType.TilesDiscard &&
-      move.itemIndex === context.index
-    )
+    return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.TilesDiscard && move.itemIndex === context.index
   }
 
   help = TileHelp
