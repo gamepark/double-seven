@@ -1,0 +1,31 @@
+/** @jsxImportSource @emotion/react */
+
+import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
+import { Tile } from '@gamepark/double-seven/material/Tile'
+import { MoveComponentProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
+import { MaterialItem, MaterialMoveBuilder } from '@gamepark/rules-api'
+import { Trans } from 'react-i18next'
+import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
+
+export const ExchangeFamilyHistory = (props: MoveComponentProps) => {
+  const { move, context } = props
+  const actionPlayer = context.action.playerId
+  const name = usePlayerName(actionPlayer)
+  const otherName = usePlayerName(move.location.player)
+  const tile: MaterialItem = context.game.items[MaterialType.Tile][move.itemIndex]
+  const othersTiles = context.game.items[MaterialType.Tile].filter(
+    (it: MaterialItem) =>
+      tile.location.type === it.location.type &&
+      tile.location.player === it.location.player &&
+      tile.location.y === it.location.y &&
+      it.id !== tile.id &&
+      it.id !== Tile.JokerTile
+  )
+  const otherColor = othersTiles.length > 0 ? othersTiles[0].id : tile.id
+
+  return (
+    <Trans defaults="history.exchange.family" values={{ player: name, color: tile.id, otherColor, otherName }}>
+      <PlayMoveButton move={displayMaterialHelp(MaterialType.Tile, tile)} transient />
+    </Trans>
+  )
+}

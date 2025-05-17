@@ -78,13 +78,6 @@ export class DoActionsRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     moves.push(...this.addSecondTileForStartFamily(move))
-    if (this.playerTilesRack.length === 0) {
-      const playerWhoEndedGame: number | undefined = this.remind(MemoryType.PlayerWhoEndedGame)
-      if (playerWhoEndedGame === this.nextPlayer) {
-        return [this.endGame()]
-      }
-      moves.push(this.startPlayerTurn(this.getNextRule(), this.nextPlayer))
-    }
     return moves
   }
 

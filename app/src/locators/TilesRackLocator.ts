@@ -7,7 +7,7 @@ class TilesRackLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext) {
     const base = playerTilesInRackLocator.getCoordinates(location, context)
 
-    return { x: base.x! + tilesRackDescription.width / 3.4, y: base.y! + tilesRackDescription.height / 2 }
+    return { x: base.x! + tilesRackDescription.width / 3.7, y: base.y! + tilesRackDescription.height / 2 }
   }
 }
 

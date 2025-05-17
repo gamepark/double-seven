@@ -1,6 +1,8 @@
 {
   "en": {
     "translation": {
+      "header.choose.first.tiles.you": "You can choose 3 tiles",
+      "header.choose.first.tiles.player": "{player} can choose 3 tiles",
       "header.choose.first.tiles.all": "All players can choose 3 tiles",
       "header.flip.tile.you": "You have to flip one tile",
       "header.flip.tile.player": "{player} have to flip one tile",
@@ -38,6 +40,14 @@
       "help.actions.4.description": "You may retrieve a Clover (Wild tile) from a family placed <bold>in front of you or another player</bold>. From your rack, take an <bold>Animal tile that matches the family</bold>. Replace the Joker with this tile and place the Joker on your rack",
       "help.actions.5": "Special Action: Two for One",
       "help.actions.5.description": "<bold>Once per turn only! Discard 2 tiles face-up</bold> from your rack. Then, <bold>draw a new tile</bold>, visible or hidden.",
+      "history.flip.tile": "{player} flip a tile and reveal <0>{color, select, 1{an orange} 2{a pink} 3{a green} 4{a purple} 5{a grey} 6{a red} 7{a blue} 8{a maroon} other{a joker}} tile</0>",
+      "history.discard.tile": "{player} discard <0>{color, select, 1{an orange} 2{a pink} 3{a green} 4{a purple} 5{a grey} 6{a red} 7{a blue} 8{a maroon} other{a joker}} tile</0>",
+      "history.start.family": "{player} start a family of <0>{color, select, 1{orange} 2{pink} 3{green} 4{purple} 5{grey} 6{red} 7{blue} other{a maroon}} tiles</0>",
+      "history.expand.family": "{player} expand the <0>{color, select, 1{orange} 2{pink} 3{green} 4{purple} 5{grey} 6{red} 7{blue} other{maroon}} family</0>",
+      "history.exchange.family": "{player} exchange a family of <0>{color, select, 1{orange} 2{pink} 3{green} 4{purple} 5{grey} 6{red} 7{blue} other{a maroon}} tiles</0> for a family of <0>{otherColor, select, 1{orange} 2{pink} 3{green} 4{purple} 5{grey} 6{red} 7{blue} other{a maroon}} tiles</0> with {otherName}",
+      "history.get.jocker": "{player} retrieve a clover",
+      "history.seven.token": "{player} take a <0>7 token</0> and win 1 point",
+      "history.double.seven.token": "{player} take a <0>77 token</0> and win 2 point",
       "Menu": "Menu",
       "OK": "OK",
       "Validate": "Validate",
