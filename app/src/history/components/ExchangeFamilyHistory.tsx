@@ -15,12 +15,13 @@ export const ExchangeFamilyHistory = (props: MoveComponentProps) => {
   const tile: MaterialItem = context.game.items[MaterialType.Tile][move.itemIndex]
   const othersTiles = context.game.items[MaterialType.Tile].filter(
     (it: MaterialItem) =>
-      tile.location.type === it.location.type &&
-      tile.location.player === it.location.player &&
-      tile.location.y === it.location.y &&
+      move.location.type === it.location.type &&
+      move.location.player === it.location.player &&
+      move.location.y === it.location.y &&
       it.id !== tile.id &&
       it.id !== Tile.JokerTile
   )
+
   const otherColor = othersTiles.length > 0 ? othersTiles[0].id : tile.id
 
   return (

@@ -1,14 +1,4 @@
-import {
-  CompetitiveScore,
-  isMoveItemType,
-  MaterialGame,
-  MaterialItem,
-  MaterialMove,
-  PositiveSequenceStrategy,
-  SecretMaterialRules,
-  TimeLimit
-} from '@gamepark/rules-api'
-import { DOUBLE_SEVEN_TOCKEN_POINTS, SEVEN_TOKEN_POINTS, TILES_IN_GAME_POINTS } from './Constantes'
+import { CompetitiveScore, MaterialGame, MaterialItem, MaterialMove, PositiveSequenceStrategy, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerTilesInGameLocationStrategy } from './material/strategies/PlayerTilesInGameLocationStrategy'
@@ -69,31 +59,24 @@ export class DoubleSevenRules
     }
   }
 
-  protected beforeItemMove(move: MaterialMove): MaterialMove[] {
-    if (isMoveItemType(MaterialType.SevenToken)(move) && move.location.type === LocationType.PlayerSevenTokenSpace) {
-      this.addScoreToActivePlayer(SEVEN_TOKEN_POINTS)
-    }
-    if (isMoveItemType(MaterialType.DoubleSevenToken)(move) && move.location.type === LocationType.PlayerDoubleSevenTokenSpace) {
-      this.addScoreToActivePlayer(DOUBLE_SEVEN_TOCKEN_POINTS)
-    }
-    if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInGame) {
-      const itemOldPosition = this.material(MaterialType.Tile).index(move.itemIndex).getItem()?.location.type
-      if (itemOldPosition === LocationType.PlayerTilesInRack) {
-        this.addScoreToActivePlayer(TILES_IN_GAME_POINTS)
-      }
+  protected afterItemMove(): MaterialMove[] {
+    const activePlayer = this.getActivePlayer()
+    if (activePlayer) {
+      this.memorize(MemoryType.PlayerScore, this.scoreHelper.getScore(activePlayer), activePlayer)
     }
     return []
   }
 
-  addScoreToActivePlayer(toAdd: number) {
-    const activePlayer = this.getActivePlayer()
-    if (activePlayer) {
-      this.memorize(MemoryType.PlayerScore, this.scoreHelper.getScore(activePlayer) + toAdd, activePlayer)
-    }
-  }
-
   getScore(playerId: number): number {
     return this.remind(MemoryType.PlayerScore, playerId)
+  }
+
+  getTieBreaker(tieBreaker: number, playerId: number): number | undefined {
+    if (tieBreaker === 1) {
+      const doubleSevenToken = this.material(MaterialType.DoubleSevenToken).location(LocationType.PlayerDoubleSevenTokenSpace).player(playerId)
+      return doubleSevenToken.length
+    }
+    return undefined
   }
 }
 
