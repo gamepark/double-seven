@@ -31,8 +31,8 @@ export class ExchangeFamilyHelper extends MaterialRulesPart {
       const movedTileY = this.playerTilesInGame.index(move.itemIndex).getItem()?.location.y
       const otherPlayerTilesToMove = this.playerTilesInGame.filter((it) => it.location.y === movedTileY)
       return [
-        ...tilesInThisLocation.moveItems((item) => ({ ...item.location, y: movedTileY, player: this.player })),
-        ...otherPlayerTilesToMove.index((index) => index !== move.itemIndex).moveItems(() => ({ ...move.location, x: undefined }))
+        tilesInThisLocation.moveItemsAtOnce({ y: movedTileY, player: this.player }),
+        otherPlayerTilesToMove.index((index) => index !== move.itemIndex).moveItemsAtOnce({ y: move.location.y, player: move.location.player })
       ]
     }
     return []
