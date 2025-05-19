@@ -18,7 +18,7 @@ export class ExchangeFamilyHelper extends MaterialRulesPart {
       return moves
     }
     this.possibleEchanges(playerTiles.length).forEach((loc) => {
-      moves.push(...playerTiles.moveItems(loc))
+      moves.push(playerTiles.minBy((item) => item.location.x!).moveItem(loc))
     })
     return moves
   }
