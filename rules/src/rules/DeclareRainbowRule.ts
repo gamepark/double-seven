@@ -7,15 +7,26 @@ import { CustomMoveType } from './CustomMove'
 import { RuleId } from './RuleId'
 
 export class DeclareRainbowRule extends PlayerTurnRule {
+  onRuleStart(): MaterialMove[] {
+    if (!this.canDeclareRainbow()) {
+      return [this.startRule(RuleId.DoActions)]
+    }
+    return []
+  }
+
   getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
-    const tilesWithoutJocker = this.playerTiles.getItems().filter((it) => it.id !== Tile.JokerTile)
-    const nbTilesGroupedByColor = uniqBy(tilesWithoutJocker, 'id').length
-    if (nbTilesGroupedByColor >= 5 && nbTilesGroupedByColor === tilesWithoutJocker.length) {
+    if (this.canDeclareRainbow()) {
       moves.push(this.customMove(CustomMoveType.DeclareRainbow))
     }
     moves.push(this.customMove(CustomMoveType.Pass))
     return moves
+  }
+
+  canDeclareRainbow(): boolean {
+    const tilesWithoutJocker = this.playerTiles.getItems().filter((it) => it.id !== Tile.JokerTile)
+    const nbTilesGroupedByColor = uniqBy(tilesWithoutJocker, 'id').length
+    return nbTilesGroupedByColor >= 5 && nbTilesGroupedByColor === tilesWithoutJocker.length
   }
 
   onCustomMove(move: CustomMove): MaterialMove[] {
