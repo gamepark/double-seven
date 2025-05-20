@@ -2,9 +2,6 @@
   "en": {
     "translation": {
       "Name": "Double seven",
-      "header.choose.first.tiles.you": "You can choose 3 tiles",
-      "header.choose.first.tiles.player": "{player} can choose 3 tiles",
-      "header.choose.first.tiles.all": "All players can choose 3 tiles",
       "header.flip.tile.you": "You have to flip one tile",
       "header.flip.tile.player": "{player} have to flip one tile",
       "header.choose.tiles.you": "You can get {nbTilesToGet} tiles",
@@ -168,9 +165,6 @@
   "fr": {
     "translation": {
       "Name": "Double seven",
-      "header.choose.first.tiles.you": "Vous pouvez choisir 3 tuiles",
-      "header.choose.first.tiles.player": "{player} peut choisir 3 tuiles",
-      "header.choose.first.tiles.all": "Tous les joueurs peuvent choisir 3 tuiles",
       "header.flip.tile.you": "Vous devez retourner une tuile",
       "header.flip.tile.player": "{player} doit retourner une tuile",
       "header.choose.tiles.you": "Vous pouvez choisir {nbTilesToGet} tuiles",

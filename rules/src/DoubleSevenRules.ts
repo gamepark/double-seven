@@ -2,7 +2,6 @@ import { CompetitiveScore, MaterialGame, MaterialItem, MaterialMove, PositiveSeq
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerTilesInGameLocationStrategy } from './material/strategies/PlayerTilesInGameLocationStrategy'
-import { ChooseFirstTilesRule } from './rules/ChooseFirstTilesRule'
 import { ChooseThreeTilesRule } from './rules/ChooseThreeTilesRule'
 import { ChooseTileAfterRainbowRule } from './rules/ChooseTileAfterRainbowRule'
 import { ChooseTwoTilesRule } from './rules/ChooseTwoTilesRule'
@@ -25,7 +24,6 @@ export class DoubleSevenRules
 {
   scoreHelper = new ScoreHelper(this.game)
   rules = {
-    [RuleId.ChooseFirstTiles]: ChooseFirstTilesRule,
     [RuleId.FlipTile]: FlipTileRule,
     [RuleId.ChooseTwoTiles]: ChooseTwoTilesRule,
     [RuleId.ChooseThreeTiles]: ChooseThreeTilesRule,
