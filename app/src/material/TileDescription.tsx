@@ -3,7 +3,7 @@ import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { Tile } from '@gamepark/double-seven/material/Tile'
 import { CardDescription, ItemContext } from '@gamepark/react-game'
-import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
+import { isMoveItemType, ItemMoveType, MaterialMove } from '@gamepark/rules-api'
 import OrangeTile from '../images/Tiles/OrangeTile.jpg'
 import PinkTile from '../images/Tiles/PinkTile.jpg'
 import GreenTile from '../images/Tiles/GreenTile.jpg'
@@ -15,6 +15,7 @@ import MaroonTile from '../images/Tiles/MaroonTile.jpg'
 import JockerTile from '../images/Tiles/JockerTile.jpg'
 import Back from '../images/Tiles/Back.jpg'
 import { TileHelp } from './help/TileHelp'
+import TilesSound from '../sounds/tiles.wav'
 
 export class TileDescription extends CardDescription {
   height = 3.9
@@ -23,6 +24,10 @@ export class TileDescription extends CardDescription {
   backImage = Back
 
   images = images
+
+  sounds = {
+    [ItemMoveType.Move]: { sound: TilesSound, volume: 0.4 }
+  }
 
   canShortClick(move: MaterialMove, context: ItemContext): boolean {
     return this.isFlipTileMove(move, context) || this.isGetTileMove(move, context) || this.isDiscardTileMove(move, context)

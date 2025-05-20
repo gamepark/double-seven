@@ -12,7 +12,6 @@ class TilesPileLocator extends PileLocator {
     if (!item.location.rotation) {
       coordinates.z = 10
     }
-    console.log(coordinates)
     return coordinates
   }
 }
