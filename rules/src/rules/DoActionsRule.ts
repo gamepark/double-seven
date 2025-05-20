@@ -21,6 +21,8 @@ export class DoActionsRule extends PlayerTurnRule {
   passHelper = new PassHelper(this.game, this.nextPlayer)
 
   getPlayerMoves(): MaterialMove[] {
+    if (this.playerTilesInRack.length === 0) return [this.customMove(CustomMoveType.Pass)]
+
     const moves: MaterialMove[] = []
     const playerFamilies: MaterialItem[][] = getFamilies(this.playerTilesInGame)
     playerFamilies.forEach((family) => {
@@ -67,5 +69,9 @@ export class DoActionsRule extends PlayerTurnRule {
 
   get playerTilesInGame() {
     return this.material(MaterialType.Tile).location(LocationType.PlayerTilesInGame).player(this.player)
+  }
+
+  get playerTilesInRack() {
+    return this.material(MaterialType.Tile).location(LocationType.PlayerTilesInRack).player(this.player)
   }
 }
