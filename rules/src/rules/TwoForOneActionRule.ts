@@ -13,7 +13,7 @@ export class TwoForOneActionRule extends PlayerTurnRule {
 
   getPlayerMoves(): MaterialMove[] {
     if (this.playerTiles.length > this.remind(MemoryType.PlayerTilesQuantity) - 2) {
-      return this.playerTiles.moveItems(() => ({ type: LocationType.TilesDiscard, rotation: false }))
+      return this.playerTiles.moveItems(() => ({ type: LocationType.TilesPile, rotation: false }))
     } else {
       return this.tilesInPile.moveItems(() => ({ type: LocationType.PlayerTilesInRack, player: this.player, rotation: true }))
     }
