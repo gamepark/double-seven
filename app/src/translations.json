@@ -11,7 +11,7 @@
       "header.choose.tile.rainbow.you": "you can get another tile",
       "header.choose.tile.rainbow.player": "{player} declare a rainbow and can get another tile",
       "header.take.actions.you": "You can do yours actions, <twoForOne>two for one</twoForOne> or <pass>Pass</pass>",
-      "header.take.actions.player": "{player} can do his/her actions",
+      "header.take.actions.player": "{player} can do their actions",
       "header.two.for.one.you": "You can discard 2 tiles to get one",
       "header.two.for.one.player": "{player} can discard 2 tiles to get one",
       "header.discard.tile.you": "You have to discard one tile",
