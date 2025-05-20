@@ -2,11 +2,11 @@
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { BoardDescription, MaterialContext } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
-import Rack from '../images/Rack.jpg'
+import Rack from '../images/Rack.png'
 
 export class TilesRackDescription extends BoardDescription {
-  height = 6.86
-  width = 20.48
+  height = 7.4
+  width = 21
 
   getStaticItems = ({ rules }: MaterialContext) => {
     const items: MaterialItem[] = []
