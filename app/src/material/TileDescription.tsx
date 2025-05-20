@@ -26,6 +26,7 @@ export class TileDescription extends CardDescription {
   images = images
 
   sounds = {
+    [ItemMoveType.MoveAtOnce]: { sound: TilesSound, volume: 0.4 },
     [ItemMoveType.Move]: { sound: TilesSound, volume: 0.4 }
   }
 
