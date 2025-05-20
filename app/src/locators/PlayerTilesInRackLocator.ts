@@ -1,9 +1,7 @@
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
-import { DropAreaDescription, getRelativePlayerIndex, FlexLocator, MaterialContext } from '@gamepark/react-game'
+import { getRelativePlayerIndex, FlexLocator, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, Location } from '@gamepark/rules-api'
-import { ActionsHelp } from '../material/help/ActionsHelp'
 import { tileDescription } from '../material/TileDescription'
-import { tilesRackDescription } from '../material/TilesRackDescription'
 
 class PlayerTilesInRackLocator extends FlexLocator {
   gap = { x: tileDescription.width }
@@ -23,7 +21,6 @@ class PlayerTilesInRackLocator extends FlexLocator {
     return [{ type: LocationType.PlayerTilesInRack }]
   }
 
-  locationDescription = new PlayerTilesInRackDescription(tilesRackDescription)
 }
 
 const coordinatesForTwoPlayers: Partial<Coordinates>[] = [
@@ -43,12 +40,5 @@ const coordinatesForFourPlayers: Partial<Coordinates>[] = [
   { x: 35, y: 20 },
   { x: 65, y: 20 }
 ]
-
-export class PlayerTilesInRackDescription extends DropAreaDescription {
-  width = tilesRackDescription.width
-  height = tilesRackDescription.height * 2
-
-  help = ActionsHelp
-}
 
 export const playerTilesInRackLocator = new PlayerTilesInRackLocator()

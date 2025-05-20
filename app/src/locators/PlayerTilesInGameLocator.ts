@@ -35,19 +35,22 @@ class PlayerTilesInGameLocator extends FlexLocator {
 }
 
 const yLocations = [
-  tileDescription.height * -5,
-  tileDescription.height * -4,
-  tileDescription.height * -3,
-  tileDescription.height * -2,
-  tileDescription.height * -1,
-  0,
+  tileDescription.height * 3,
+  tileDescription.height * 2,
   tileDescription.height,
-  tileDescription.height * 2
+  0,
+  tileDescription.height * -1,
+  tileDescription.height * -2,
+  tileDescription.height * -3,
+  tileDescription.height * -4,
+  tileDescription.height * -5,
+  tileDescription.height * -6,
+  tileDescription.height * -7
 ]
 
 export class PlayerTilesInGameDescription extends DropAreaDescription {
   width = tileDescription.width * 10
-  height = tileDescription.height * 8
+  height = tileDescription.height * 10
 }
 
 export class PlayerTilesInGamePlaceDescription extends DropAreaDescription {
