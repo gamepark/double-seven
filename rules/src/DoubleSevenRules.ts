@@ -1,7 +1,6 @@
 import { CompetitiveScore, MaterialGame, MaterialItem, MaterialMove, PositiveSequenceStrategy, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { PlayerTilesInGameLocationStrategy } from './material/strategies/PlayerTilesInGameLocationStrategy'
 import { ChooseThreeTilesRule } from './rules/ChooseThreeTilesRule'
 import { ChooseTileAfterRainbowRule } from './rules/ChooseTileAfterRainbowRule'
 import { ChooseTwoTilesRule } from './rules/ChooseTwoTilesRule'
@@ -50,7 +49,7 @@ export class DoubleSevenRules
       [LocationType.TilesPile]: new PositiveSequenceStrategy(),
       [LocationType.TilesDiscard]: new PositiveSequenceStrategy(),
       [LocationType.PlayerTilesInRack]: new PositiveSequenceStrategy(),
-      [LocationType.PlayerTilesInGame]: new PlayerTilesInGameLocationStrategy()
+      [LocationType.PlayerTilesInGame]: new PositiveSequenceStrategy()
     },
     [MaterialType.SevenToken]: {
       [LocationType.PlayerSevenTokenSpace]: new PositiveSequenceStrategy('y')

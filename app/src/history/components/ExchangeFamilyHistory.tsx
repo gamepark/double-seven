@@ -17,7 +17,7 @@ export const ExchangeFamilyHistory = (props: MoveComponentProps) => {
     (it: MaterialItem) =>
       move.location.type === it.location.type &&
       move.location.player === it.location.player &&
-      move.location.y === it.location.y &&
+      move.location.id === it.location.id &&
       it.id !== tile.id &&
       it.id !== Tile.JokerTile
   )

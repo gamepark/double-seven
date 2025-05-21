@@ -11,8 +11,8 @@ export class ExchangeFamilyHelper extends MaterialRulesPart {
     this.player = player
   }
 
-  addMovesForExchangeFamily(locationY: number): MaterialMove[] {
-    const playerTiles = this.playerTilesInGame.location((loc) => loc.y === locationY)
+  addMovesForExchangeFamily(locationId: number): MaterialMove[] {
+    const playerTiles = this.playerTilesInGame.location((loc) => loc.id === locationId)
     const moves: MaterialMove[] = []
     if (playerTiles.length === 0) {
       return moves
@@ -26,13 +26,13 @@ export class ExchangeFamilyHelper extends MaterialRulesPart {
   switchTilesForExchange(move: MaterialMove): MaterialMove[] {
     if (isMoveItemType(MaterialType.Tile)(move) && this.checkIfMoveIsAExchangeMove(move)) {
       const tilesInThisLocation = this.material(MaterialType.Tile).location(
-        (loc) => loc.type === LocationType.PlayerTilesInGame && loc.y === move.location.y && loc.player === move.location.player
+        (loc) => loc.type === LocationType.PlayerTilesInGame && loc.id === move.location.id && loc.player === move.location.player
       )
-      const movedTileY = this.playerTilesInGame.index(move.itemIndex).getItem()?.location.y
-      const otherPlayerTilesToMove = this.playerTilesInGame.filter((it) => it.location.y === movedTileY)
+      const movedTileId = this.playerTilesInGame.index(move.itemIndex).getItem()?.location.id
+      const otherPlayerTilesToMove = this.playerTilesInGame.filter((it) => it.location.id === movedTileId)
       return [
-        tilesInThisLocation.moveItemsAtOnce({ y: movedTileY, player: this.player }),
-        otherPlayerTilesToMove.index((index) => index !== move.itemIndex).moveItemsAtOnce({ y: move.location.y, player: move.location.player })
+        tilesInThisLocation.moveItemsAtOnce({ id: movedTileId, player: this.player }),
+        otherPlayerTilesToMove.index((index) => index !== move.itemIndex).moveItemsAtOnce({ id: move.location.id, player: move.location.player })
       ]
     }
     return []

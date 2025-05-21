@@ -1,36 +1,41 @@
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
-import { DropAreaDescription, FlexLocator, LocationDescription, MaterialContext } from '@gamepark/react-game'
-import { Coordinates, Location } from '@gamepark/rules-api'
+import { DropAreaDescription, ListLocator, LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 import { tileDescription } from '../material/TileDescription'
 import { playerTilesInRackLocator } from './PlayerTilesInRackLocator'
 
-class PlayerTilesInGameLocator extends FlexLocator {
-  lineSize = 11
-
-  getGap(location: Location, context: MaterialContext): Partial<Coordinates> {
-    const nbTilesInThisLine = context.rules
-      .material(MaterialType.Tile)
-      .location((loc) => loc.type === LocationType.PlayerTilesInGame && loc.player === location.player && loc.y === location.y).length
-    if (nbTilesInThisLine < 9) {
-      return { x: tileDescription.width }
-    }
-    return { x: tileDescription.width / 1.3 }
-  }
+class PlayerTilesInGameLocator extends ListLocator {
+  maxCount = 7
+  gap = { x: tileDescription.width }
 
   getCoordinates(location: Location, context: MaterialContext) {
     const base = this.getBaseCoordinates(location, context)
-    if (location.x === undefined) return { x: base.x - 1.2, y: base.y - 6 }
-    return { x: base.x, y: base.y + yLocations[location.y ?? 0] }
+    const y = base.y + yLocations[location.id ?? 0]
+    if (location.x === undefined) {
+      const tilesInFamily = this.getNbTilesInFamily(location, context)
+      if(tilesInFamily > 0) {
+        return { x: base.x - 8 + this.gap.x * tilesInFamily, y }
+      }
+      return { x: base.x, y: base.y - 5.9 }
+    }
+    return { x: base.x, y }
   }
   getBaseCoordinates(location: Location, context: MaterialContext) {
     const playerTilesRackCoordinates = playerTilesInRackLocator.getCoordinates(location, context)
     return { x: playerTilesRackCoordinates.x! - 3, y: playerTilesRackCoordinates.y! - 17 }
   }
 
-  getLocationDescription(location: Location): LocationDescription {
-    if (location.x === undefined) return new PlayerTilesInGameDescription()
+  getLocationDescription(location: Location, context: MaterialContext): LocationDescription {
+    if (location.x === undefined && this.getNbTilesInFamily(location, context) === 0) return new PlayerTilesInGameDescription()
     return new PlayerTilesInGamePlaceDescription()
+  }
+
+  getNbTilesInFamily(location: Location, context: MaterialContext) {
+    return context.rules
+      .material(MaterialType.Tile)
+      .location((loc) => loc.type === LocationType.PlayerTilesInGame && loc.id === location.id)
+      .player(context.player).length
   }
 }
 
@@ -49,7 +54,7 @@ const yLocations = [
 ]
 
 export class PlayerTilesInGameDescription extends DropAreaDescription {
-  width = tileDescription.width * 10
+  width = tileDescription.width * 7
   height = tileDescription.height * 10
 }
 

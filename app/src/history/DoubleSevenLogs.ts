@@ -1,9 +1,11 @@
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { Tile } from '@gamepark/double-seven/material/Tile'
+import { ExpandFamilyHelper } from '@gamepark/double-seven/rules/helper/ExpandFamilyHelper'
+import { StartFamilyHelper } from '@gamepark/double-seven/rules/helper/StartFamilyHelper'
 import { RuleId } from '@gamepark/double-seven/rules/RuleId'
 import { LogDescription, MoveComponentContext, MovePlayedLogDescription } from '@gamepark/react-game'
-import { isMoveItem, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import { isMoveItem, MaterialMove } from '@gamepark/rules-api'
 import { DiscardTileHistory } from './components/DiscardTileHistory'
 import { ExchangeFamilyHistory } from './components/ExchangeFamilyHistory'
 import { ExpandFamilyHistory } from './components/ExpandFamilyHistory'
@@ -54,29 +56,15 @@ export class DoubleSevenLogs implements LogDescription {
     }
     if (ruleId === RuleId.DoActions && this.getMoveLocationType(move) === LocationType.PlayerTilesInGame) {
       if (isMoveItem(move) && move.location.player === actionPlayer) {
-        if (move.location.x === undefined) {
+        if (new StartFamilyHelper(context.game).checkIfMoveIsStartFamilyMove(move)) {
           return {
             Component: StartFamilyHistory,
             player: actionPlayer
           }
-        } else {
-          const oldItemLocation = context.game.items[MaterialType.Tile][move.itemIndex].location
-          const nbTilesInFamily: MaterialItem[] = context.game.items[MaterialType.Tile].filter(
-            (it: MaterialItem) => it.location.type === move.location.type && it.location.y === move.location.y && it.location.player === move.location.player
-          )
-          const tileInThisLocation = context.game.items[MaterialType.Tile].filter((it: MaterialItem) => {
-            return (
-              it.location.player === actionPlayer &&
-              it.location.type === LocationType.PlayerTilesInGame &&
-              it.location.y === move.location.y &&
-              it.location.x === move.location.x
-            )
-          })
-          if (nbTilesInFamily.length > 1 && oldItemLocation.player === actionPlayer && tileInThisLocation.length === 0) {
-            return {
-              Component: ExpandFamilyHistory,
-              player: actionPlayer
-            }
+        } else if (new ExpandFamilyHelper(context.game).checkIfMoveIsAExpandFamilyMove(move)) {
+          return {
+            Component: ExpandFamilyHistory,
+            player: actionPlayer
           }
         }
       }

@@ -27,5 +27,5 @@ export const getTiles = () => {
 }
 
 export const getFamilies = (playerTiles: Material): MaterialItem[][] => {
-  return values(groupBy(playerTiles.getItems(), (item: MaterialItem) => item.location.y))
+  return values(groupBy(playerTiles.getItems(), (item: MaterialItem) => item.location.id))
 }

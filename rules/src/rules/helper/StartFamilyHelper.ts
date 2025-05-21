@@ -1,4 +1,5 @@
 import { isMoveItemType, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
+import { uniq } from 'lodash'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { Tile } from '../../material/Tile'
@@ -21,39 +22,31 @@ export class StartFamilyHelper extends MaterialRulesPart {
     const playerTilesForThisColor = this.playerTilesRack.filter((item) => item.id === tile)
     const jockerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
     if (playerTilesForThisColor.length >= 2 || (playerTilesForThisColor.length === 1 && jockerTiles.length > 0)) {
-      moves.push(...playerTilesForThisColor.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player })))
+      const id = uniq(this.playerTilesInGame.getItems().map((it) => it.location.id as number)).length
+      moves.push(...playerTilesForThisColor.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id })))
     }
     return moves
   }
 
   addSecondTileForStartFamily(move: MaterialMove): MaterialMove[] {
     if (isMoveItemType(MaterialType.Tile)(move) && this.checkIfMoveIsStartFamilyMove(move)) {
-      const posedTileY = this.playerTilesInGame.index(move.itemIndex).getItem()?.location.y
       const tile = this.material(MaterialType.Tile).index(move.itemIndex).getItem()?.id as Tile
       const playerTilesForThisColor = this.playerTilesRack.filter((item) => item.id === tile)
       const jockerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
-      const tilesInGameForThisFamily = this.playerTilesInGame.filter((item) => item.location.y === posedTileY)
-      if (tilesInGameForThisFamily.length === 0) {
-        return []
-      }
-      const x = tilesInGameForThisFamily.maxBy((item) => item.location.x!).getItem()?.location.x ?? 0
-      const y = tilesInGameForThisFamily.maxBy((item) => item.location.x!).getItem()?.location.y ?? 0
       if (playerTilesForThisColor.length > 0) {
-        return [playerTilesForThisColor.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, x: x + 1, y }))]
+        return [playerTilesForThisColor.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: move.location.id }))]
       } else if (jockerTiles.length > 0) {
-        return [jockerTiles.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, x: x + 1, y }))]
+        return [jockerTiles.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: move.location.id }))]
       }
     }
     return []
   }
 
-  private checkIfMoveIsStartFamilyMove(move: MaterialMove): boolean {
-    return (
-      isMoveItemType(MaterialType.Tile)(move) &&
-      move.location.type === LocationType.PlayerTilesInGame &&
-      move.location.player === this.player &&
-      move.location.x === undefined
-    )
+  checkIfMoveIsStartFamilyMove(move: MaterialMove): boolean {
+    if (!isMoveItemType(MaterialType.Tile)(move)) return false
+
+    const tilesInGameForThisFamily = this.playerTilesInGame.filter((item) => item.location.id === move.location.id)
+    return move.location.type === LocationType.PlayerTilesInGame && move.location.player === this.player && tilesInGameForThisFamily.length === 1
   }
 
   get playerTilesRack() {

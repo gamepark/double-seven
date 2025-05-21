@@ -26,7 +26,7 @@ export class GetJokerHelper extends MaterialRulesPart {
   switchTilesForGetJocker(move: MaterialMove): MaterialMove[] {
     if (isMoveItemType(MaterialType.Tile)(move) && this.checkIfMoveIsAGetJockerMove(move)) {
       const tileInThisLocation = this.material(MaterialType.Tile).location(
-        (loc) => loc.type === LocationType.PlayerTilesInGame && loc.y === move.location.y && loc.x === move.location.x && loc.player === move.location.player
+        (loc) => loc.type === LocationType.PlayerTilesInGame && loc.id === move.location.id && loc.x === move.location.x && loc.player === move.location.player
       )
       if (tileInThisLocation.length > 0) {
         return [tileInThisLocation.moveItem(() => ({ type: LocationType.PlayerTilesInRack, player: this.player }))]

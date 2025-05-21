@@ -20,7 +20,7 @@ export const ExpandFamilyHistory = (props: MoveComponentProps) => {
       (it: MaterialItem) =>
         it.location.type === LocationType.PlayerTilesInGame &&
         it.location.player === actionPlayer &&
-        it.location.y === move.location.y &&
+        it.location.id === move.location.id &&
         it.id !== Tile.JokerTile
     )
     tile = tilesInFamily[0]

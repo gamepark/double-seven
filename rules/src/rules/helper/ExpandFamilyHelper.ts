@@ -11,31 +11,27 @@ export class ExpandFamilyHelper extends MaterialRulesPart {
     this.player = player
   }
 
-  addMovesForExpandFamily(tile: Tile, familyY: number) {
+  addMovesForExpandFamily(tile: Tile, familyId: number) {
     const playerTilesForThisColor = this.playerTilesRack.filter((item) => item.id === tile)
     const jockerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
-    const tilesInGameForThisFamily = this.playerTilesInGame.filter((item) => item.location.y === familyY)
     const moves: MaterialMove[] = []
-    if (tilesInGameForThisFamily.length === 0) {
-      return moves
-    }
-    const x = tilesInGameForThisFamily.maxBy((item) => item.location.x!).getItem()?.location.x ?? 0
-    const y = tilesInGameForThisFamily.maxBy((item) => item.location.x!).getItem()?.location.y ?? 0
     if (playerTilesForThisColor.length > 0) {
-      moves.push(...playerTilesForThisColor.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, x: x + 1, y })))
+      moves.push(...playerTilesForThisColor.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: familyId })))
     }
     if (jockerTiles.length > 0) {
-      moves.push(...jockerTiles.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, x: x + 1, y })))
+      moves.push(...jockerTiles.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: familyId })))
     }
     return moves
   }
 
   checkIfMoveIsAExpandFamilyMove(move: MaterialMove): boolean {
+    if (!isMoveItemType(MaterialType.Tile)(move)) return false
+
+    const tilesInGameForThisFamily = this.playerTilesInGame.filter((item) => item.location.id === move.location.id)
     return (
-      isMoveItemType(MaterialType.Tile)(move) &&
       move.location.type === LocationType.PlayerTilesInGame &&
       move.location.player === this.player &&
-      move.location.x !== undefined &&
+      tilesInGameForThisFamily.length > 1 &&
       this.material(MaterialType.Tile).index(move.itemIndex).getItem()?.location.type === LocationType.PlayerTilesInRack
     )
   }

@@ -17,7 +17,7 @@ gameAnimations
     if (!isMoveItemType(MaterialType.Tile)(move)) return false
     const nbTilesInFamily = context.rules
       .material(MaterialType.Tile)
-      .location((loc) => loc.type === LocationType.PlayerTilesInGame && loc.player === context.rules.game.rule?.player && loc.y === move.location.y)
+      .location((loc) => loc.type === LocationType.PlayerTilesInGame && loc.player === context.rules.game.rule?.player && loc.id === move.location.id)
     return nbTilesInFamily.length === 1
   })
   .none()

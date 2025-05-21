@@ -19,7 +19,7 @@ export class SevenTokenHelper extends MaterialRulesPart {
     if (isMoveItemType(MaterialType.Tile)(move) && this.expandFamilyHelper.checkIfMoveIsAExpandFamilyMove(move)) {
       const playerFamiliesWithSevenToken: number[] | undefined = this.remind(MemoryType.PlayerFamilyWithSevenToken, this.player) ?? []
       if (this.checkIfCanGetSevenToken(move, playerFamiliesWithSevenToken)) {
-        this.memorize(MemoryType.PlayerFamilyWithSevenToken, [...playerFamiliesWithSevenToken, move.location.y], this.player)
+        this.memorize(MemoryType.PlayerFamilyWithSevenToken, [...playerFamiliesWithSevenToken, move.location.id], this.player)
         moves.push(
           this.material(MaterialType.SevenToken).createItem({ location: { type: LocationType.PlayerSevenTokenSpace, player: this.player, rotation: false } })
         )
@@ -39,7 +39,7 @@ export class SevenTokenHelper extends MaterialRulesPart {
   }
 
   private checkIfCanGetSevenToken(move: MoveItem, playerFamiliesWithSevenToken: number[]): boolean {
-    const family = this.playerTilesInGame.filter((it) => it.location.y === move.location.y)
+    const family = this.playerTilesInGame.filter((it) => it.location.id === move.location.id)
     const oldLocation = this.material(MaterialType.Tile).index(move.itemIndex).getItem()?.location.type
 
     return family.length >= 6 && !playerFamiliesWithSevenToken.includes(move.location.y!) && oldLocation === LocationType.PlayerTilesInRack

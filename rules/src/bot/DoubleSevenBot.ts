@@ -59,7 +59,7 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
       if (isMoveItem(it) && it.location.type === LocationType.PlayerTilesInGame && it.location.x !== undefined) {
         const tileInLocation = rules
           .material(MaterialType.Tile)
-          .location((loc) => loc.type === it.location.type && it.location.player === loc.player && it.location.y === loc.y && it.location.x === loc.x)
+          .location((loc) => loc.type === it.location.type && it.location.player === loc.player && it.location.id === loc.id && it.location.x === loc.x)
           .getItem()
         return tileInLocation?.id === Tile.JokerTile
       }
@@ -76,10 +76,10 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
         if (!isMoveItem(a) || !isMoveItem(b)) return 0
         const playerTilesInGame = rules.material(MaterialType.Tile).location(LocationType.PlayerTilesInGame).player(rules.game.rule?.player)
         const families = getFamilies(playerTilesInGame).flatMap((f) => {
-          return { y: f[0].location.y, length: f.length }
+          return { id: f[0].location.id, length: f.length }
         })
-        const aLength = families.find((t) => t.y === a.location.y)?.length ?? 0
-        const bLength = families.find((t) => t.y === b.location.y)?.length ?? 0
+        const aLength = families.find((t) => t.id === a.location.id)?.length ?? 0
+        const bLength = families.find((t) => t.id === b.location.id)?.length ?? 0
         return aLength - bLength
       })
     if (expandFamilyMoves.length > 0) return [expandFamilyMoves[expandFamilyMoves.length - 1]]
