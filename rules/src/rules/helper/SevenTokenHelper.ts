@@ -21,9 +21,7 @@ export class SevenTokenHelper extends MaterialRulesPart {
       if (this.checkIfCanGetSevenToken(move, playerFamiliesWithSevenToken)) {
         this.memorize(MemoryType.PlayerFamilyWithSevenToken, [...playerFamiliesWithSevenToken, move.location.y], this.player)
         moves.push(
-          this.material(MaterialType.SevenToken)
-            .location(LocationType.SevenTokenDeck)
-            .moveItem(() => ({ type: LocationType.PlayerSevenTokenSpace, player: this.player, rotation: false }))
+          this.material(MaterialType.SevenToken).createItem({ location: { type: LocationType.PlayerSevenTokenSpace, player: this.player, rotation: false } })
         )
         moves.push(...this.getDoubleSevenToken(playerFamiliesWithSevenToken))
       }

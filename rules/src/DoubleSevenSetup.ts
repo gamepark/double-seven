@@ -15,9 +15,7 @@ export class DoubleSevenSetup extends MaterialGameSetup<number, MaterialType, Lo
 
   setupMaterial(_options: DoubleSevenOptions) {
     this.material(MaterialType.DoubleSevenToken).createItem({ location: { type: LocationType.DoubleSevenTokenIdleSpace, rotation: true } })
-    this.material(MaterialType.SevenToken).createItem({ location: { type: LocationType.SevenTokenDeck, rotation: true }, quantity: 8 })
     const tiles = shuffle(getTiles())
-    //const nbTilesForPlayers = this.players.length * 3
     tiles.forEach((tile) => {
       this.material(MaterialType.Tile).createItem({
         location: { type: LocationType.TilesPile, rotation: true },

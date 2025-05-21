@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { CardDescription } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import SevenTokenBack from '../images/Tokens/SevenTokenBack.jpg'
@@ -15,6 +16,9 @@ export class SevenTokenDescription extends CardDescription {
   isFlipped = (item: MaterialItem) => item.location.rotation === true
 
   help = SevenTokenHelp
+
+  stockLocation = { type: LocationType.SevenTokenDeck }
+  staticItem = { quantity: 8, location: { ...this.stockLocation, rotation: true } }
 }
 
 export const sevenTokenDescription = new SevenTokenDescription()
