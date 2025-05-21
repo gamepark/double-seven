@@ -8,11 +8,7 @@ export class FlipTileRule extends PlayerTurnRule {
     if (this.tilesInPile.length === 0) {
       return [this.startRule(this.getNextRule())]
     }
-    return []
-  }
-
-  getPlayerMoves(): MaterialMove[] {
-    return this.tilesInPile.moveItems(({ location }) => ({ ...location, rotation: false }))
+    return [this.tilesInPile.moveItem(({ location }) => ({ ...location, rotation: false }))]
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {

@@ -2,8 +2,8 @@
   "en": {
     "translation": {
       "Name": "Double seven",
-      "header.flip.tile.you": "You have to flip one tile",
-      "header.flip.tile.player": "{player} have to flip one tile",
+      "header.flip.tile.you": "You flip one tile",
+      "header.flip.tile.player": "{player} flip one tile",
       "header.choose.tiles.you": "You can get {nbTilesToGet} tiles",
       "header.choose.tiles.player": "{player} can get {nbTilesToGet} tiles",
       "header.declare.rainbow.you": "You can <declareRainbow>Declare a rainbow</declareRainbow> or <pass>Pass</pass>",
@@ -165,8 +165,8 @@
   "fr": {
     "translation": {
       "Name": "Double seven",
-      "header.flip.tile.you": "Vous devez retourner une tuile",
-      "header.flip.tile.player": "{player} doit retourner une tuile",
+      "header.flip.tile.you": "Vous retournez une tuile",
+      "header.flip.tile.player": "{player} retourne une tuile",
       "header.choose.tiles.you": "Vous pouvez choisir {nbTilesToGet} tuiles",
       "header.choose.tiles.player": "{player} peut choisir {nbTilesToGet} tuiles",
       "header.declare.rainbow.you": "Vous pouvez <declareRainbow>Déclarer un arc-en-ciel</declareRainbow> ou <pass>Passer</pass>",
