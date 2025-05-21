@@ -10,6 +10,7 @@ import ReactDOM from 'react-dom'
 import { gameAnimations } from './animations/GameAnimations'
 import App from './App'
 import { DoubleSevenLogs } from './history/DoubleSevenLogs'
+import Background from './images/Background.jpg'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
 import translations from './translations.json'
@@ -28,6 +29,7 @@ ReactDOM.render(
       animations={gameAnimations}
       ai={(game: MaterialGame, playerId: number) => Promise.resolve(new DoubleSevenBot(playerId).run(game))}
       logs={new DoubleSevenLogs()}
+      theme={{ root: { background: { image: Background, overlay: 'rgba(0, 0, 0, 0.3)' } } }}
     >
       <App />
     </GameProvider>
