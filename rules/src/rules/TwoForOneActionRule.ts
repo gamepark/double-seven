@@ -7,32 +7,18 @@ import { RuleId } from './RuleId'
 export class TwoForOneActionRule extends PlayerTurnRule {
   onRuleStart(): MaterialMove[] {
     this.memorize(MemoryType.PlayerAlreadyGetTwoForOneAction, true)
-    this.memorize(MemoryType.PlayerTilesQuantity, this.playerTiles.length)
     return []
   }
 
   getPlayerMoves(): MaterialMove[] {
-    if (this.playerTiles.length > this.remind(MemoryType.PlayerTilesQuantity) - 2) {
-      return this.playerTiles.moveItems(() => ({ type: LocationType.TilesPile, rotation: false }))
-    } else {
-      return this.tilesInPile.moveItems(() => ({ type: LocationType.PlayerTilesInRack, player: this.player, rotation: true }))
-    }
+    return this.playerTiles.moveItems(() => ({ type: LocationType.TilesPile, rotation: false }))
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
-    if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInRack) {
-      return [this.startRule(RuleId.DoActions)]
+    if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.TilesPile) {
+      return [this.startRule(RuleId.TwoForOneActionGetTile)]
     }
     return []
-  }
-
-  onRuleEnd(): MaterialMove[] {
-    this.forget(MemoryType.PlayerTilesQuantity)
-    return []
-  }
-
-  get tilesInPile() {
-    return this.material(MaterialType.Tile).location(LocationType.TilesPile)
   }
 
   get playerTiles() {

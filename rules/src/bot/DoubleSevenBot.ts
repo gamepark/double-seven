@@ -24,7 +24,7 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
   }
 
   getBotMoveToChooseATile(rules: DoubleSevenRules, legalMoves: MaterialMove[]): MaterialMove[] {
-    const chooseTileRules = [RuleId.ChooseTwoTiles, RuleId.ChooseThreeTiles, RuleId.ChooseTileAfterRainbow, RuleId.TwoForOneAction]
+    const chooseTileRules = [RuleId.ChooseTwoTiles, RuleId.ChooseThreeTiles, RuleId.ChooseTileAfterRainbow, RuleId.TwoForOneActionGetTile]
     if (!chooseTileRules.includes(rules.game.rule?.id ?? 0)) return legalMoves
 
     const visibleTile = rules.material(MaterialType.Tile).location(LocationType.TilesPile).rotation(false)

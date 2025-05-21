@@ -27,8 +27,8 @@ export class DoActionsRule extends PlayerTurnRule {
     const playerFamilies: MaterialItem[][] = getFamilies(this.playerTilesInGame)
     playerFamilies.forEach((family) => {
       const tile = family.find((t: MaterialItem) => (t.id as Tile) !== Tile.JokerTile)
-      moves.push(...this.expandFamilyHelper.addMovesForExpandFamily(tile?.id as Tile, tile!.location.id!))
-      moves.push(...this.exchangeFamilyHelper.addMovesForExchangeFamily(tile!.location.id!))
+      moves.push(...this.expandFamilyHelper.addMovesForExpandFamily(tile?.id as Tile, tile!.location.id))
+      moves.push(...this.exchangeFamilyHelper.addMovesForExchangeFamily(tile!.location.id))
     })
     tiles.forEach((tile) => {
       moves.push(...this.startFamilyHelper.addMovesForStartFamily(tile))
@@ -52,13 +52,13 @@ export class DoActionsRule extends PlayerTurnRule {
   onCustomMove(move: CustomMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     moves.push(...this.passHelper.checkIfPassAndMoveToNextAction(move))
-    moves.push(...this.twoForOneHelper.checkAndMoveToTwoForOneAction(move))
     return moves
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     const moves: MaterialMove[] = []
     moves.push(...this.startFamilyHelper.addSecondTileForStartFamily(move))
+    moves.push(...this.twoForOneHelper.checkAndMoveToTwoForOneAction(move))
     return moves
   }
 

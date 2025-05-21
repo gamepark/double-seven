@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
+import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { CustomMoveType } from '@gamepark/double-seven/rules/CustomMove'
 import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
-import { isCustomMoveType } from '@gamepark/rules-api'
+import { isCustomMoveType, MaterialMoveBuilder } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
+import displayLocationHelp = MaterialMoveBuilder.displayLocationHelp
 
 export const DoActionsHeader = () => {
   const player = usePlayerId()
@@ -12,7 +14,6 @@ export const DoActionsHeader = () => {
   const itsMe = player && activePlayer === player
   const name = usePlayerName(activePlayer)
   const pass = useLegalMove(isCustomMoveType(CustomMoveType.Pass))
-  const twoForOne = useLegalMove(isCustomMoveType(CustomMoveType.TwoForOneAction))
 
   if (itsMe) {
     return (
@@ -20,7 +21,7 @@ export const DoActionsHeader = () => {
         defaults="header.take.actions.you"
         components={{
           pass: <PlayMoveButton move={pass} />,
-          twoForOne: <PlayMoveButton move={twoForOne} />
+          actions: <PlayMoveButton move={displayLocationHelp({ type: LocationType.PlayerTilesInRack })} transient />
         }}
       />
     )

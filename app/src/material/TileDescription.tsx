@@ -31,11 +31,7 @@ export class TileDescription extends CardDescription {
   }
 
   canShortClick(move: MaterialMove, context: ItemContext): boolean {
-    return this.isFlipTileMove(move, context) || this.isGetTileMove(move, context) || this.isDiscardTileMove(move, context)
-  }
-
-  isFlipTileMove(move: MaterialMove, context: ItemContext) {
-    return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.TilesPile && move.itemIndex === context.index
+    return this.isGetTileMove(move, context) || this.isDiscardTileMove(move, context)
   }
 
   isGetTileMove(move: MaterialMove, context: ItemContext) {

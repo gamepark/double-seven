@@ -17,7 +17,7 @@ class PlayerTilesInGameLocator extends ListLocator {
       if(tilesInFamily > 0) {
         return { x: base.x - 8 + this.gap.x * tilesInFamily, y }
       }
-      return { x: base.x, y: base.y - 5.9 }
+      return { x: base.x, y: base.y - 9.1 }
     }
     return { x: base.x, y }
   }

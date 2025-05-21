@@ -1,7 +1,6 @@
-import { isCustomMoveType, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
+import { isMoveItemType, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
-import { CustomMoveType } from '../CustomMove'
 import { MemoryType } from '../Memory'
 import { RuleId } from '../RuleId'
 
@@ -15,7 +14,7 @@ export class TwoForOneHelper extends MaterialRulesPart {
 
   addTwoForOneMove() {
     if (this.canDoTwoForOneAction()) {
-      return [this.customMove(CustomMoveType.TwoForOneAction)]
+      return [...this.playerTilesRack.moveItems(() => ({ type: LocationType.TilesPile, rotation: false }))]
     }
     return []
   }
@@ -33,7 +32,7 @@ export class TwoForOneHelper extends MaterialRulesPart {
   }
 
   checkAndMoveToTwoForOneAction(move: MaterialMove): MaterialMove[] {
-    if (isCustomMoveType(CustomMoveType.TwoForOneAction)(move)) {
+    if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.TilesPile) {
       return [this.startRule(RuleId.TwoForOneAction)]
     }
     return []

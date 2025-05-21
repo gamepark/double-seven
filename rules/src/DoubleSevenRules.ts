@@ -11,6 +11,7 @@ import { FlipTileRule } from './rules/FlipTileRule'
 import { ScoreHelper } from './rules/helper/ScoreHelper'
 import { MemoryType } from './rules/Memory'
 import { RuleId } from './rules/RuleId'
+import { TwoForOneActionGetTileRule } from './rules/TwoForOneActionGetTileRule'
 import { TwoForOneActionRule } from './rules/TwoForOneActionRule'
 
 /**
@@ -30,6 +31,7 @@ export class DoubleSevenRules
     [RuleId.ChooseTileAfterRainbow]: ChooseTileAfterRainbowRule,
     [RuleId.DoActions]: DoActionsRule,
     [RuleId.TwoForOneAction]: TwoForOneActionRule,
+    [RuleId.TwoForOneActionGetTile]: TwoForOneActionGetTileRule,
     [RuleId.DiscardTile]: DiscardTileRule
   }
 

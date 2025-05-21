@@ -1,7 +1,9 @@
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
-import { getRelativePlayerIndex, FlexLocator, MaterialContext } from '@gamepark/react-game'
+import { DropAreaDescription, getRelativePlayerIndex, FlexLocator, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, Location } from '@gamepark/rules-api'
+import { ActionsHelp } from '../material/help/ActionsHelp'
 import { tileDescription } from '../material/TileDescription'
+import { tilesRackDescription } from '../material/TilesRackDescription'
 
 class PlayerTilesInRackLocator extends FlexLocator {
   gap = { x: tileDescription.width }
@@ -10,6 +12,13 @@ class PlayerTilesInRackLocator extends FlexLocator {
   lineGap = { y: 2.35 }
 
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
+    const base = this.getBaseCoordinates(location, context)
+
+    if(location.x === undefined) return { x: base.x, y: base.y! + 4}
+    return { x: base.x, y: base.y! + 0.4}
+  }
+
+    getBaseCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
     const index = getRelativePlayerIndex(context, location.player)
     if (context.rules.players.length === 2) return coordinatesForTwoPlayers[index]
     if (context.rules.players.length === 3) return coordinatesForThreePlayers[index]
@@ -21,6 +30,7 @@ class PlayerTilesInRackLocator extends FlexLocator {
     return [{ type: LocationType.PlayerTilesInRack }]
   }
 
+  locationDescription = new PlayerTilesInRackDescription(tilesRackDescription)
 }
 
 const coordinatesForTwoPlayers: Partial<Coordinates>[] = [
@@ -40,5 +50,12 @@ const coordinatesForFourPlayers: Partial<Coordinates>[] = [
   { x: 35, y: 20 },
   { x: 65, y: 20 }
 ]
+
+export class PlayerTilesInRackDescription extends DropAreaDescription {
+  width = tilesRackDescription.width
+  height = tilesRackDescription.height
+
+  help = ActionsHelp
+}
 
 export const playerTilesInRackLocator = new PlayerTilesInRackLocator()

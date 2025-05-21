@@ -7,5 +7,6 @@ export enum RuleId {
   ChooseTileAfterRainbow,
   DoActions,
   TwoForOneAction,
+  TwoForOneActionGetTile,
   DiscardTile
 }
