@@ -14,12 +14,17 @@ export class ExpandFamilyHelper extends MaterialRulesPart {
   addMovesForExpandFamily(tile: Tile, familyId: number) {
     const playerTilesForThisColor = this.playerTilesRack.filter((item) => item.id === tile)
     const jockerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
+    const tilesInGameForThisFamily = this.playerTilesInGame.filter((item) => item.location.id === familyId)
     const moves: MaterialMove[] = []
+    if (tilesInGameForThisFamily.length === 0) {
+      return moves
+    }
+    const x = tilesInGameForThisFamily.length
     if (playerTilesForThisColor.length > 0) {
-      moves.push(...playerTilesForThisColor.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: familyId })))
+      moves.push(...playerTilesForThisColor.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, x, id: familyId })))
     }
     if (jockerTiles.length > 0) {
-      moves.push(...jockerTiles.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: familyId })))
+      moves.push(...jockerTiles.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, x, id: familyId })))
     }
     return moves
   }
