@@ -14,7 +14,8 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
     const rules = new DoubleSevenRules(game)
     const player = game.rule?.player
     const legalMoves = super.getLegalMoves(game)
-    if (rules.game.rule?.id === RuleId.ChooseTwoTiles) {
+    const chooseTileRules = [RuleId.ChooseTwoTiles, RuleId.ChooseThreeTiles, RuleId.ChooseTileAfterRainbow, RuleId.TwoForOneActionGetTile]
+    if (chooseTileRules.includes(rules.game.rule?.id ?? 0)) {
       return this.getBotMoveToChooseATile(rules, legalMoves)
     }
     if (rules.game.rule?.id === RuleId.DoActions) {
@@ -24,14 +25,13 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
   }
 
   getBotMoveToChooseATile(rules: DoubleSevenRules, legalMoves: MaterialMove[]): MaterialMove[] {
-    const chooseTileRules = [RuleId.ChooseTwoTiles, RuleId.ChooseThreeTiles, RuleId.ChooseTileAfterRainbow, RuleId.TwoForOneActionGetTile]
-    if (!chooseTileRules.includes(rules.game.rule?.id ?? 0)) return legalMoves
 
     const visibleTile = rules.material(MaterialType.Tile).location(LocationType.TilesPile).rotation(false)
-
     if (visibleTile.length === 0) return legalMoves
 
-    if (visibleTile.getItem()?.id === Tile.JokerTile) return legalMoves.filter((it) => isMoveItem(it) && it.itemIndex === visibleTile.getIndex())
+    const visibleTileJoker = visibleTile.filter((it) => it.id === Tile.JokerTile)
+
+    if (visibleTileJoker.length) return legalMoves.filter((it) => isMoveItem(it) && it.itemIndex === visibleTileJoker.getIndex())
 
     const playerTilesInGame = rules
       .material(MaterialType.Tile)
@@ -40,7 +40,13 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
       .getItems()
       .map((it: MaterialItem) => it.id)
 
-    if (playerTilesInGame.includes(visibleTile.getItem()?.id)) return legalMoves.filter((it) => isMoveItem(it) && it.itemIndex === visibleTile.getIndex())
+    const moves: MaterialMove[] = []
+    playerTilesInGame.forEach((id) => {
+      const visibleTileWithSameColor = visibleTile.filter((it) => it.id === id)
+      if (visibleTileWithSameColor.length) moves.push(...legalMoves.filter((it) => isMoveItem(it) && it.itemIndex === visibleTileWithSameColor.getIndex()))
+    })
+
+    if (moves.length > 0) return moves
 
     const playerTilesInRack = rules
       .material(MaterialType.Tile)
