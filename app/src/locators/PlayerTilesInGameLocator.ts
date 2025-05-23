@@ -13,9 +13,8 @@ class PlayerTilesInGameLocator extends ListLocator {
     const base = this.getBaseCoordinates(location, context)
     const y = base.y + yLocations[location.id ?? 0]
     if (location.x === undefined) {
-      const tilesInFamily = this.getNbTilesInFamily(location, context)
-      if(tilesInFamily > 0) {
-        return { x: base.x - 8 + this.gap.x * tilesInFamily, y }
+      if(location.id !== undefined) {
+        return { x: base.x - tileDescription.width * 3, y: y - tileDescription.height }
       }
       return { x: base.x, y: base.y - 9.1 }
     }
@@ -26,8 +25,13 @@ class PlayerTilesInGameLocator extends ListLocator {
     return { x: playerTilesRackCoordinates.x! - 3, y: playerTilesRackCoordinates.y! - 17 }
   }
 
-  getLocationDescription(location: Location, context: MaterialContext): LocationDescription {
-    if (location.x === undefined && this.getNbTilesInFamily(location, context) === 0) return new PlayerTilesInGameDescription()
+  getLocationDescription(location: Location): LocationDescription {
+    if (location.x === undefined) {
+      if(location.id !== undefined) {
+        return new PlayerTilesInGamePlaceDescription()
+      }
+      return new PlayerTilesInGameDescription()
+    }
     return new PlayerTilesInGamePlaceDescription()
   }
 
