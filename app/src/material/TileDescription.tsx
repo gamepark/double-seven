@@ -2,6 +2,7 @@
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { Tile } from '@gamepark/double-seven/material/Tile'
+import { RuleId } from '@gamepark/double-seven/rules/RuleId'
 import { CardDescription, ItemContext } from '@gamepark/react-game'
 import { isMoveItemType, ItemMoveType, MaterialMove } from '@gamepark/rules-api'
 import OrangeTile from '../images/Tiles/OrangeTile.jpg'
@@ -31,7 +32,12 @@ export class TileDescription extends CardDescription {
   }
 
   canShortClick(move: MaterialMove, context: ItemContext): boolean {
-    return this.isGetTileMove(move, context) || this.isDiscardTileMove(move, context)
+    return (
+      this.isGetTileMove(move, context) ||
+      this.isDiscardTileMove(move, context) ||
+      this.isTwoForOneMove(move, context) ||
+      this.isStartOrExpandFamily(move, context)
+    )
   }
 
   isGetTileMove(move: MaterialMove, context: ItemContext) {
@@ -45,6 +51,27 @@ export class TileDescription extends CardDescription {
 
   isDiscardTileMove(move: MaterialMove, context: ItemContext) {
     return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.TilesDiscard && move.itemIndex === context.index
+  }
+
+  isTwoForOneMove(move: MaterialMove, context: ItemContext) {
+    return (
+      isMoveItemType(MaterialType.Tile)(move) &&
+      move.location.type === LocationType.TilesPile &&
+      move.itemIndex === context.index &&
+      context.rules.game.rule?.id === RuleId.TwoForOneAction
+    )
+  }
+
+  isStartOrExpandFamily(move: MaterialMove, context: ItemContext) {
+    if (!isMoveItemType(MaterialType.Tile)(move)) return false
+
+    const noTileAtLocation =
+      context.rules.material(MaterialType.Tile).location((loc) => loc.type === move.location.type && loc.id === move.location.id && loc.x === move.location.x)
+        .length === 0
+
+    return (
+      noTileAtLocation && move.location.type === LocationType.PlayerTilesInGame && move.location.player === context.player && move.itemIndex === context.index
+    )
   }
 
   help = TileHelp
