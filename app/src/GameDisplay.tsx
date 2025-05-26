@@ -2,6 +2,7 @@
 import { css } from '@emotion/react'
 import { GameTable, GameTableNavigation } from '@gamepark/react-game'
 import { FC } from 'react'
+import { LastTurnDialog } from './dialogs/LastTurnDialog'
 import { PlayerPanels } from './panels/PlayerPanels'
 
 type GameDisplayProps = {
@@ -34,6 +35,7 @@ export const GameDisplay: FC<GameDisplayProps> = ({ players }: GameDisplayProps)
       >
         <GameTableNavigation />
         <PlayerPanels />
+        <LastTurnDialog />
       </GameTable>
     </>
   )
