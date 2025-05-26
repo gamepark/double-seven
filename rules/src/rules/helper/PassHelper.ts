@@ -16,7 +16,7 @@ export class PassHelper extends MaterialRulesPart {
   }
 
   checkIfPassAndMoveToNextAction(move: MaterialMove): MaterialMove[] {
-    if (isCustomMoveType(CustomMoveType.Pass)(move)) {
+    if (isCustomMoveType(CustomMoveType.Pass)(move) || isCustomMoveType(CustomMoveType.Empty)(move)) {
       const playerWhoEndedGame: number | undefined = this.remind(MemoryType.PlayerWhoEndedGame)
       if (playerWhoEndedGame === this.nextPlayer) {
         return [this.endGame()]

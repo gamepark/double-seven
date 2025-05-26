@@ -14,8 +14,19 @@ export const DoActionsHeader = () => {
   const itsMe = player && activePlayer === player
   const name = usePlayerName(activePlayer)
   const pass = useLegalMove(isCustomMoveType(CustomMoveType.Pass))
+  const empty = useLegalMove(isCustomMoveType(CustomMoveType.Empty))
 
   if (itsMe) {
+    if (empty) {
+      return (
+        <Trans
+          defaults="header.take.actions.empty"
+          components={{
+            empty: <PlayMoveButton move={empty} />
+          }}
+        />
+      )
+    }
     return (
       <Trans
         defaults="header.take.actions.you"

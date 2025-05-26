@@ -24,4 +24,5 @@ gameAnimations.when().rule(RuleId.ChooseTileAfterRainbow).move(isMoveItemsAtOnce
 gameAnimations.when().rule(RuleId.DeclareRainbow).move(isMoveItemsAtOnce).sound(false)
 
 gameAnimations.when().rule(RuleId.DoActions).move(isCustomMoveType(CustomMoveType.Pass)).duration(1)
+gameAnimations.when().rule(RuleId.DoActions).move(isCustomMoveType(CustomMoveType.Empty)).duration(1)
 gameAnimations.when().rule(RuleId.DeclareRainbow).move(isCustomMoveType(CustomMoveType.DeclareRainbow)).duration(1)
