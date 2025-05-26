@@ -27,11 +27,12 @@ export const GameDisplay: FC<GameDisplayProps> = ({ players }: GameDisplayProps)
         xMin={getTableWidth().xMin}
         xMax={getTableWidth().xMax}
         yMin={-30}
-        yMax={30}
+        yMax={35}
         margin={margin}
+        verticalCenter
         css={process.env.NODE_ENV === 'development' && tableBorder}
       >
-        <GameTableNavigation css={navigationCss} />
+        <GameTableNavigation />
         <PlayerPanels />
       </GameTable>
     </>
@@ -40,8 +41,4 @@ export const GameDisplay: FC<GameDisplayProps> = ({ players }: GameDisplayProps)
 
 const tableBorder = css`
   border: 1px solid white;
-`
-const navigationCss = css`
-  left: 31em;
-  top: 8em;
 `
