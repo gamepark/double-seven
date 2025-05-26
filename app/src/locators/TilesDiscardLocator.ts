@@ -2,7 +2,7 @@
 import { DeckLocator } from '@gamepark/react-game'
 
 class TilesDiscardLocator extends DeckLocator {
-  coordinates = { x: 20, y: -27 }
+  coordinates = { x: 10, y: 30 }
 }
 
 export const tilesDiscardLocator = new TilesDiscardLocator()

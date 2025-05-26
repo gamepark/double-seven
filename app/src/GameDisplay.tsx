@@ -27,7 +27,7 @@ export const GameDisplay: FC<GameDisplayProps> = ({ players }: GameDisplayProps)
       <GameTable
         xMin={getTableWidth().xMin}
         xMax={getTableWidth().xMax}
-        yMin={-30}
+        yMin={-23}
         yMax={35}
         margin={margin}
         verticalCenter

@@ -2,7 +2,7 @@
 import { DeckLocator } from '@gamepark/react-game'
 
 class SevenTokenDeckLocator extends DeckLocator {
-  coordinates = { x: 0, y: -26 }
+  coordinates = { x: 4, y: 30 }
 
   navigationSorts = []
 }
