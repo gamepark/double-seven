@@ -21,12 +21,21 @@ const components = {
   underline: <u />
 }
 
-export const TileHelp: FC<MaterialHelpProps> = () => {
+export const TileHelp: FC<MaterialHelpProps> = (props) => {
   const { t } = useTranslation()
+  const { item } = props
+  const isInDiscard = item.location?.type === LocationType.TilesDiscard
 
   return (
     <>
       <h2>{t(`help.tile`)}</h2>
+      {isInDiscard && (
+        <>
+          <p>
+            <Trans defaults="help.tile.discard" components={components} css={mb0} />
+          </p>
+        </>
+      )}
       <p>
         <Trans defaults="help.tile.description" components={components} css={mb0} />
       </p>
