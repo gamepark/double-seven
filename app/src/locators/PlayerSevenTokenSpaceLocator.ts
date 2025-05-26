@@ -3,7 +3,7 @@ import { Coordinates, Location } from '@gamepark/rules-api'
 import { playerTilesInRackLocator } from './PlayerTilesInRackLocator'
 
 class PlayerSevenTokenSpaceLocator extends ListLocator {
-  gap = { y: 1.5 }
+  gap = { y: -1.5 }
 
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
     const base = this.getBaseCoordinates(location, context)
