@@ -25,7 +25,6 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
   }
 
   getBotMoveToChooseATile(rules: DoubleSevenRules, legalMoves: MaterialMove[]): MaterialMove[] {
-
     const visibleTile = rules.material(MaterialType.Tile).location(LocationType.TilesPile).rotation(false)
     if (visibleTile.length === 0) return legalMoves
 
@@ -61,7 +60,9 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
   }
 
   getBotMoveForDoActionRule(rules: DoubleSevenRules, legalMoves: MaterialMove[], player?: number): MaterialMove[] {
-    const getJokerMove = legalMoves.find((it: MaterialMove) => {
+    const legalMovesWithoutTwoForOne = legalMoves.filter((it) => (isMoveItem(it) && it.location.type !== LocationType.TilesPile) || isCustomMove(it))
+
+    const getJokerMove = legalMovesWithoutTwoForOne.find((it: MaterialMove) => {
       if (isMoveItem(it) && it.location.type === LocationType.PlayerTilesInGame && it.location.x !== undefined) {
         const tileInLocation = rules
           .material(MaterialType.Tile)
@@ -73,7 +74,7 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
     })
     if (getJokerMove) return [getJokerMove]
 
-    const expandFamilyMoves = legalMoves
+    const expandFamilyMoves = legalMovesWithoutTwoForOne
       .filter(
         (it) =>
           isMoveItem(it) && it.location.type === LocationType.PlayerTilesInGame && it.location.player === rules.game.rule?.player && it.location.x !== undefined
@@ -90,13 +91,13 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
       })
     if (expandFamilyMoves.length > 0) return [expandFamilyMoves[expandFamilyMoves.length - 1]]
 
-    const startFamilyMoves = legalMoves.filter(
+    const startFamilyMoves = legalMovesWithoutTwoForOne.filter(
       (it) =>
         isMoveItem(it) && it.location.type === LocationType.PlayerTilesInGame && it.location.player === rules.game.rule?.player && it.location.x === undefined
     )
     if (startFamilyMoves.length > 0) return startFamilyMoves
 
-    const exchangeFamily = legalMoves
+    const exchangeFamily = legalMovesWithoutTwoForOne
       .filter(
         (it) => isMoveItem(it) && it.location.type === LocationType.PlayerTilesInGame && it.location.player !== rules.game.rule?.player && it.location.x === 0
       )
@@ -116,7 +117,7 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
       })
     if (exchangeFamily.length > 0) return exchangeFamily
 
-    return legalMoves.filter((move: MaterialMove) => {
+    return legalMovesWithoutTwoForOne.filter((move: MaterialMove) => {
       return (isMoveItemType(MaterialType.Tile)(move) && (move.location.player === player || move.location.player === undefined)) || isCustomMove(move)
     })
   }
