@@ -1,6 +1,4 @@
-import { LocationType } from '@gamepark/double-seven/material/LocationType'
-import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
-import { DropAreaDescription, ListLocator, LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { DropAreaDescription, ListLocator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { tileDescription } from '../material/TileDescription'
 import { playerTilesInRackLocator } from './PlayerTilesInRackLocator'
@@ -25,22 +23,7 @@ class PlayerTilesInGameLocator extends ListLocator {
     return { x: playerTilesRackCoordinates.x! - 3, y: playerTilesRackCoordinates.y! - 17 }
   }
 
-  getLocationDescription(location: Location): LocationDescription {
-    if (location.x === undefined) {
-      if(location.id !== undefined) {
-        return new PlayerTilesInGamePlaceDescription()
-      }
-      return new PlayerTilesInGameDescription()
-    }
-    return new PlayerTilesInGamePlaceDescription()
-  }
-
-  getNbTilesInFamily(location: Location, context: MaterialContext) {
-    return context.rules
-      .material(MaterialType.Tile)
-      .location((loc) => loc.type === LocationType.PlayerTilesInGame && loc.id === location.id)
-      .player(context.player).length
-  }
+  locationDescription = new PlayerTilesInGamePlaceDescription()
 }
 
 const yLocations = [
@@ -57,14 +40,10 @@ const yLocations = [
   tileDescription.height * -7
 ]
 
-export class PlayerTilesInGameDescription extends DropAreaDescription {
-  width = tileDescription.width * 7
-  height = tileDescription.height * 10
-}
-
 export class PlayerTilesInGamePlaceDescription extends DropAreaDescription {
   width = tileDescription.width
   height = tileDescription.height
+  borderRadius = 0.3
 }
 
 export const playerTilesInGameLocator = new PlayerTilesInGameLocator()
