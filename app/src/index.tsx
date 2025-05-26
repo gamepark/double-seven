@@ -13,6 +13,7 @@ import { DoubleSevenLogs } from './history/DoubleSevenLogs'
 import Background from './images/Background.jpg'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
+import { DoublSevenScoring } from './scoring/DoubleSevenScoring'
 import translations from './translations.json'
 
 setupTranslation(translations, { debug: false })
@@ -25,6 +26,7 @@ ReactDOM.render(
       optionsSpec={DoubleSevenOptionsSpec}
       GameSetup={DoubleSevenSetup}
       material={Material}
+      scoring={new DoublSevenScoring()}
       locators={Locators}
       animations={gameAnimations}
       ai={(game: MaterialGame, playerId: number) => Promise.resolve(new DoubleSevenBot(playerId).run(game))}

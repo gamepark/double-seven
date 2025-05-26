@@ -5,11 +5,20 @@ import { MaterialType } from '../../material/MaterialType'
 
 export class ScoreHelper extends MaterialRulesPart {
   getScore(playerId: number): number {
-    const tiles = this.getElementLength(MaterialType.Tile, LocationType.PlayerTilesInGame, playerId)
-    const sevenToken = this.getElementLength(MaterialType.SevenToken, LocationType.PlayerSevenTokenSpace, playerId)
-    const doubleSevenToken = this.getElementLength(MaterialType.DoubleSevenToken, LocationType.PlayerDoubleSevenTokenSpace, playerId)
+    return this.getTilesScore(playerId) + this.getSevenTokenScore(playerId) + this.getDoubleSevenTokenScore(playerId)
+  }
 
-    return tiles + sevenToken + doubleSevenToken * DOUBLE_SEVEN_TOCKEN_POINTS
+  getDoubleSevenTokenScore(playerId: number): number {
+    const doubleSevenToken = this.getElementLength(MaterialType.DoubleSevenToken, LocationType.PlayerDoubleSevenTokenSpace, playerId)
+    return doubleSevenToken * DOUBLE_SEVEN_TOCKEN_POINTS
+  }
+
+  getSevenTokenScore(playerId: number): number {
+    return this.getElementLength(MaterialType.SevenToken, LocationType.PlayerSevenTokenSpace, playerId)
+  }
+
+  getTilesScore(playerId: number): number {
+    return this.getElementLength(MaterialType.Tile, LocationType.PlayerTilesInGame, playerId)
   }
 
   getElementLength(materialType: MaterialType, locationType: LocationType, playerId: number): number {
