@@ -1,5 +1,4 @@
 export enum CustomMoveType {
   DeclareRainbow = 1,
-  Pass,
-  TwoForOneAction
+  Pass
 }

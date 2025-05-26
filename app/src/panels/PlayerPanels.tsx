@@ -1,22 +1,34 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
+import { LocationType } from '@gamepark/double-seven/material/LocationType'
+import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { MemoryType } from '@gamepark/double-seven/rules/Memory'
-import { StyledPlayerPanel, usePlayers, useRules } from '@gamepark/react-game'
+import { RuleId } from '@gamepark/double-seven/rules/RuleId'
+import { StyledPlayerPanel, useAnimation, usePlayers, useRules } from '@gamepark/react-game'
+import { isCustomMove, MaterialMove } from '@gamepark/rules-api'
 import { createPortal } from 'react-dom'
-import Star from '../images/Panels/star.png'
+import { useTranslation } from 'react-i18next'
 import Panel1 from '../images/Panels/Panel1.jpg'
 import Panel2 from '../images/Panels/Panel2.jpg'
 import Panel3 from '../images/Panels/Panel3.jpg'
 import Panel4 from '../images/Panels/Panel4.jpg'
+import Star from '../images/Panels/star.png'
 
 export const PlayerPanels = () => {
+  const { t } = useTranslation()
   const rules = useRules<DoubleSevenRules>()!
   const players = usePlayers<number>({ sortFromMe: true })
   const root = document.getElementById('root')
+  const animation = useAnimation<MaterialMove>((animation) => isCustomMove(animation.move))
   if (!root) {
     return null
   }
+
+  const speakingPlayer = animation && rules.getActivePlayer()
+  const isEmpty = speakingPlayer !== undefined && rules.material(MaterialType.Tile).location(LocationType.PlayerTilesInRack).player(speakingPlayer).length === 0
+  const isRainbow = rules.game.rule?.id === RuleId.DeclareRainbow
+  const speak = speakingPlayer !== undefined && (isRainbow ? t('speak.rainbow') : isEmpty ? t('speak.empty') : t('speak.pass'))
 
   return createPortal(
     <>
@@ -32,6 +44,7 @@ export const PlayerPanels = () => {
               value: rules.remind(MemoryType.PlayerScore, player.id) || 0
             }
           ]}
+          speak={speakingPlayer === player.id && speak}
         />
       ))}
     </>,

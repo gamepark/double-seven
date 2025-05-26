@@ -1,8 +1,9 @@
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
+import { CustomMoveType } from '@gamepark/double-seven/rules/CustomMove'
 import { RuleId } from '@gamepark/double-seven/rules/RuleId'
 import { MaterialGameAnimations } from '@gamepark/react-game'
-import { isMoveItemType, isMoveItemTypeAtOnce, MaterialMove } from '@gamepark/rules-api'
+import { isCustomMoveType, isMoveItemType, isMoveItemTypeAtOnce, MaterialMove } from '@gamepark/rules-api'
 
 export const gameAnimations = new MaterialGameAnimations()
 
@@ -25,3 +26,6 @@ gameAnimations
 gameAnimations.when().rule(RuleId.ChooseTileAfterRainbow).move(checkIfIsRotateTilesInRack).sound(false)
 
 gameAnimations.when().rule(RuleId.DeclareRainbow).move(checkIfIsRotateTilesInRack).sound(false)
+
+gameAnimations.when().rule(RuleId.DoActions).move(isCustomMoveType(CustomMoveType.Pass)).duration(1)
+gameAnimations.when().rule(RuleId.DeclareRainbow).move(isCustomMoveType(CustomMoveType.DeclareRainbow)).duration(1)
