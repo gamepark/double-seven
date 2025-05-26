@@ -15,7 +15,7 @@ class PlayerTilesInRackLocator extends FlexLocator {
     const base = this.getBaseCoordinates(location, context)
 
     if(location.x === undefined) return { x: base.x, y: base.y! + 4}
-    return { x: base.x, y: base.y! + 0.4}
+    return { x: base.x, y: base.y! + 0.4 }
   }
 
     getBaseCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
@@ -53,7 +53,8 @@ const coordinatesForFourPlayers: Partial<Coordinates>[] = [
 
 export class PlayerTilesInRackDescription extends DropAreaDescription {
   width = tilesRackDescription.width
-  height = tilesRackDescription.height
+  height = tilesRackDescription.height * 1.5
+  borderRadius = 0.4
 
   help = ActionsHelp
 }
