@@ -24,11 +24,10 @@ export class DoubleSevenSetup extends MaterialGameSetup<number, MaterialType, Lo
     })
 
     this.players.forEach((player) => {
-      for (let i = 0; i < 3; i++) {
-        this.material(MaterialType.Tile)
-          .location(LocationType.TilesPile)
-          .moveItem(() => ({ type: LocationType.PlayerTilesInRack, player, rotation: true }))
-      }
+      this.material(MaterialType.Tile)
+        .location(LocationType.TilesPile)
+        .limit(3)
+        .moveItems(() => ({ type: LocationType.PlayerTilesInRack, player, rotation: true }))
     })
   }
 

@@ -34,20 +34,20 @@ class PlayerTilesInRackLocator extends FlexLocator {
 }
 
 const coordinatesForTwoPlayers: Partial<Coordinates>[] = [
-  { x: -44, y: 20 },
+  { x: -40, y: 20 },
   { x: 35, y: 20 }
 ]
 
 const coordinatesForThreePlayers: Partial<Coordinates>[] = [
-  { x: -44, y: 20 },
-  { x: 35, y: 20 },
+  { x: -40, y: 20 },
+  { x: 32, y: 20 },
   { x: 65, y: 20 }
 ]
 
 const coordinatesForFourPlayers: Partial<Coordinates>[] = [
-  { x: -74, y: 20 },
-  { x: -44, y: 20 },
-  { x: 35, y: 20 },
+  { x: -70, y: 20 },
+  { x: -37, y: 20 },
+  { x: 32, y: 20 },
   { x: 65, y: 20 }
 ]
 

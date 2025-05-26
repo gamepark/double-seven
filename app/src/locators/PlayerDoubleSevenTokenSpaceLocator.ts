@@ -5,7 +5,7 @@ import { playerTilesInRackLocator } from './PlayerTilesInRackLocator'
 class PlayerDoubleSevenTokenSpaceLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
     const playerTilesRackCoordinates = playerTilesInRackLocator.getCoordinates(location, context)
-    return { x: playerTilesRackCoordinates.x! + 21, y: playerTilesRackCoordinates.y! - 3 }
+    return { x: playerTilesRackCoordinates.x! + 19, y: playerTilesRackCoordinates.y! - 1 }
   }
 }
 
