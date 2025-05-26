@@ -48,14 +48,16 @@ export const TileHelp: FC<MaterialHelpProps> = () => {
         </li>
       </ul>
       <h3>{t(`help.tile.objectives`)}</h3>
-      <Trans
-        defaults="help.tile.objectives.description"
-        components={{
-          ...components,
-          action: <PlayMoveButton css={linkButtonCss} move={displayLocationHelp({ type: LocationType.PlayerTilesInRack })} transient />
-        }}
-        css={mb0}
-      />
+      <p>
+        <Trans
+          defaults="help.tile.objectives.description"
+          components={{
+            ...components,
+            action: <PlayMoveButton css={linkButtonCss} move={displayLocationHelp({ type: LocationType.PlayerTilesInRack })} transient />
+          }}
+          css={mb0}
+        />
+      </p>
     </>
   )
 }
