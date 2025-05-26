@@ -24,6 +24,8 @@ class PlayerTilesInGameLocator extends ListLocator {
   }
 
   locationDescription = new PlayerTilesInGamePlaceDescription()
+
+  navigationSorts = []
 }
 
 const yLocations = [

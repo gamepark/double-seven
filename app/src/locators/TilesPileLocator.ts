@@ -14,6 +14,8 @@ class TilesPileLocator extends PileLocator {
     }
     return coordinates
   }
+
+  navigationSorts = []
 }
 
 export const tilesPileLocator = new TilesPileLocator()

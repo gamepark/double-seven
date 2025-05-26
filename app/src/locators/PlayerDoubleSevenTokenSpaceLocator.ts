@@ -7,6 +7,8 @@ class PlayerDoubleSevenTokenSpaceLocator extends Locator {
     const playerTilesRackCoordinates = playerTilesInRackLocator.getCoordinates(location, context)
     return { x: playerTilesRackCoordinates.x! + 19, y: playerTilesRackCoordinates.y! - 1 }
   }
+
+  navigationSorts = []
 }
 
 export const playerDoubleSevenTokenSpaceLocator = new PlayerDoubleSevenTokenSpaceLocator()

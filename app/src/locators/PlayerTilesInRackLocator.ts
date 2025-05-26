@@ -31,6 +31,8 @@ class PlayerTilesInRackLocator extends FlexLocator {
   }
 
   locationDescription = new PlayerTilesInRackDescription(tilesRackDescription)
+
+  navigationSorts = []
 }
 
 const coordinatesForTwoPlayers: Partial<Coordinates>[] = [

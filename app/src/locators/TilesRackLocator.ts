@@ -9,6 +9,8 @@ class TilesRackLocator extends Locator {
 
     return { x: base.x! + tilesRackDescription.width / 3.7, y: base.y!}
   }
+
+  navigationSorts = []
 }
 
 export const tilesRackLocator = new TilesRackLocator()

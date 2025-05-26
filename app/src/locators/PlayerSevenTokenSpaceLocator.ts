@@ -15,6 +15,8 @@ class PlayerSevenTokenSpaceLocator extends ListLocator {
     const playerTilesRackCoordinates = playerTilesInRackLocator.getCoordinates(location, context)
     return { x: playerTilesRackCoordinates.x! - 7, y: playerTilesRackCoordinates.y! - 2 }
   }
+
+  navigationSorts = []
 }
 
 export const playerSevenTokenSpaceLocator = new PlayerSevenTokenSpaceLocator()
