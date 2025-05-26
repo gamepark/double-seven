@@ -9,7 +9,7 @@ class PlayerTilesInRackLocator extends FlexLocator {
   gap = { x: tileDescription.width }
 
   lineSize = 5
-  lineGap = { y: 2.35 }
+  lineGap = { y: 2.35, z: 2 }
 
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
     const base = this.getBaseCoordinates(location, context)

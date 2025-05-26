@@ -6,20 +6,22 @@ import { RuleId } from './RuleId'
 
 export class ChooseTileAfterRainbowRule extends ChooseTwoTilesRule {
   nbTileToGet = 1
-  nextRule = RuleId.DoActions
 
   onRuleStart(): MaterialMove[] {
-    const moves = super.onRuleStart()
     if (this.tilesInPile.length === 0) {
-      moves.push(this.playerTiles.moveItemsAtOnce({ rotation: true }))
-    }
-    return moves
-  }
-
-  beforeItemMove(move: ItemMove): MaterialMove[] {
-    if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInRack) {
-      return [this.playerTiles.moveItemsAtOnce({ rotation: true })]
+      return this.endRule()
     }
     return []
+  }
+
+  afterItemMove(move: ItemMove): MaterialMove[] {
+    if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInRack) {
+      return this.endRule()
+    }
+    return []
+  }
+
+  endRule() {
+    return [this.playerTiles.moveItemsAtOnce({ rotation: true }), this.startRule(RuleId.DoActions)]
   }
 }
