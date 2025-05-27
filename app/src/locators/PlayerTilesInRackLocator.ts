@@ -36,21 +36,21 @@ class PlayerTilesInRackLocator extends FlexLocator {
 }
 
 const coordinatesForTwoPlayers: Partial<Coordinates>[] = [
-  { x: -40, y: 20 },
-  { x: 35, y: 20 }
+  { x: -30, y: 14 },
+  { x: 25, y: 14 }
 ]
 
 const coordinatesForThreePlayers: Partial<Coordinates>[] = [
-  { x: -40, y: 20 },
-  { x: 32, y: 20 },
-  { x: 65, y: 20 }
+  { x: -30, y: 14 },
+  { x: 23, y: 14 },
+  { x: 48, y: 14 }
 ]
 
 const coordinatesForFourPlayers: Partial<Coordinates>[] = [
-  { x: -70, y: 20 },
-  { x: -37, y: 20 },
-  { x: 32, y: 20 },
-  { x: 65, y: 20 }
+  { x: -55, y: 14 },
+  { x: -30, y: 14 },
+  { x: 23, y: 14 },
+  { x: 48, y: 14 }
 ]
 
 export class PlayerTilesInRackDescription extends DropAreaDescription {

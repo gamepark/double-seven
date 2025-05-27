@@ -54,7 +54,7 @@ export class DoubleSevenRules
       [LocationType.PlayerTilesInGame]: new PositiveSequenceStrategy()
     },
     [MaterialType.SevenToken]: {
-      [LocationType.PlayerSevenTokenSpace]: new PositiveSequenceStrategy('y')
+      [LocationType.PlayerSevenTokenSpace]: new PositiveSequenceStrategy()
     }
   }
 

@@ -31,7 +31,7 @@ ReactDOM.render(
       animations={gameAnimations}
       ai={(game: MaterialGame, playerId: number) => Promise.resolve(new DoubleSevenBot(playerId).run(game))}
       logs={new DoubleSevenLogs()}
-      theme={{ root: { background: { image: Background, overlay: 'rgba(0, 0, 0, 0.3)' } } }}
+      theme={{ root: { background: { image: Background, overlay: 'rgba(0, 0, 0, 0)' } } }}
     >
       <App />
     </GameProvider>

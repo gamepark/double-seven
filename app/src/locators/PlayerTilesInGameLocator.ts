@@ -20,7 +20,7 @@ class PlayerTilesInGameLocator extends ListLocator {
   }
   getBaseCoordinates(location: Location, context: MaterialContext) {
     const playerTilesRackCoordinates = playerTilesInRackLocator.getCoordinates(location, context)
-    return { x: playerTilesRackCoordinates.x! - 2, y: playerTilesRackCoordinates.y! - 17 }
+    return { x: playerTilesRackCoordinates.x! - 3, y: playerTilesRackCoordinates.y! - 17 }
   }
 
   locationDescription = new PlayerTilesInGamePlaceDescription()
