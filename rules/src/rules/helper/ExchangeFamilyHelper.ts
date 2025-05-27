@@ -12,7 +12,7 @@ export class ExchangeFamilyHelper extends MaterialRulesPart {
   }
 
   addMovesForExchangeFamily(locationId: number): MaterialMove[] {
-    const playerTiles = this.playerTilesInGame.location((loc) => loc.id === locationId)
+    const playerTiles = this.playerTilesInGame.location((loc) => loc.id === locationId).sort((item) => item.location.x!)
     if (playerTiles.length === 0) {
       return []
     }
@@ -25,6 +25,7 @@ export class ExchangeFamilyHelper extends MaterialRulesPart {
         .location(LocationType.PlayerTilesInGame)
         .locationId(move.location.id)
         .player(move.location.player)
+        .sort((item) => item.location.x!)
       const originId = this.playerTilesInGame.index(move.indexes[0]).getItem()?.location.id
       return [tilesInThisLocation.moveItemsAtOnce({ type: LocationType.PlayerTilesInGame, player: this.player, id: originId })]
     }
