@@ -29,7 +29,7 @@ export class GetJokerHelper extends MaterialRulesPart {
         (loc) => loc.type === LocationType.PlayerTilesInGame && loc.id === move.location.id && loc.x === move.location.x && loc.player === move.location.player
       )
       if (tileInThisLocation.length > 0) {
-        return [tileInThisLocation.moveItem(() => ({ type: LocationType.PlayerTilesInRack, player: this.player }))]
+        return [tileInThisLocation.moveItem(() => ({ type: LocationType.PlayerTilesInRack, player: this.player, rotation: true }))]
       }
     }
     return []
