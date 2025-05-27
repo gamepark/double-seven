@@ -14,7 +14,7 @@ enum ScoringKeys {
   Total
 }
 
-export class DoublSevenScoring implements ScoringDescription {
+export class DoubleSevenScoring implements ScoringDescription {
   getScoringKeys(_: DoubleSevenRules) {
     return getEnumValues(ScoringKeys)
   }
