@@ -7,8 +7,8 @@ import Rack from '../images/Rack.png'
 import displayRulesHelp = MaterialMoveBuilder.displayRulesHelp
 
 export class TilesRackDescription extends BoardDescription {
-  height = 7.4
-  width = 21
+  height = 6.56
+  width = 18.6
 
   getStaticItems = ({ rules }: MaterialContext) => {
     const items: MaterialItem[] = []

@@ -55,7 +55,7 @@ const coordinatesForFourPlayers: Partial<Coordinates>[] = [
 
 export class PlayerTilesInRackDescription extends DropAreaDescription {
   width = tilesRackDescription.width
-  height = tilesRackDescription.height * 1.5
+  height = tilesRackDescription.height * 1.8
   borderRadius = 0.4
 
   help = ActionsHelp
