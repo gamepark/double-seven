@@ -9,6 +9,7 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { gameAnimations } from './animations/GameAnimations'
 import App from './App'
+import { RulesHelp } from './dialogs/RulesHelp'
 import { DoubleSevenLogs } from './history/DoubleSevenLogs'
 import Background from './images/Background.jpg'
 import { Locators } from './locators/Locators'
@@ -29,6 +30,7 @@ ReactDOM.render(
       scoring={new DoubleSevenScoring()}
       locators={Locators}
       animations={gameAnimations}
+      rulesHelp={RulesHelp}
       ai={(game: MaterialGame, playerId: number) => Promise.resolve(new DoubleSevenBot(playerId).run(game))}
       logs={new DoubleSevenLogs()}
       theme={{ root: { background: { image: Background, overlay: 'rgba(0, 0, 0, 0)' } } }}
