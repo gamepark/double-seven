@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
+import { RuleId } from '@gamepark/double-seven/rules/RuleId'
 import { BoardDescription, MaterialContext } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api'
+import { MaterialItem, MaterialMoveBuilder } from '@gamepark/rules-api'
 import Rack from '../images/Rack.png'
+import displayRulesHelp = MaterialMoveBuilder.displayRulesHelp
 
 export class TilesRackDescription extends BoardDescription {
   height = 7.4
@@ -17,6 +19,8 @@ export class TilesRackDescription extends BoardDescription {
   }
 
   image = Rack
+
+  displayHelp = () => displayRulesHelp(RuleId.DiscardTile)
 }
 
 export const tilesRackDescription = new TilesRackDescription()
