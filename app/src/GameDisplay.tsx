@@ -14,7 +14,7 @@ export const GameDisplay: FC<GameDisplayProps> = ({ players }: GameDisplayProps)
   const getTableWidth = (): { xMin: number; xMax: number } => {
     switch (players) {
       case 2:
-        return { xMin: -40, xMax: 50 }
+        return { xMin: -55, xMax: 65 }
       case 3:
         return { xMin: -35, xMax: 70 }
       case 4:
