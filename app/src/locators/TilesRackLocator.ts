@@ -1,12 +1,15 @@
-import { Locator, MaterialContext } from '@gamepark/react-game'
+import { getRelativePlayerIndex, Locator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
-import { playerTilesInRackLocator } from './PlayerTilesInRackLocator'
 
 class TilesRackLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext) {
-    const base = playerTilesInRackLocator.getCoordinates(location, context)
+    return { x: this.getPlayerX(location.player!, context), y: 18 }
+  }
 
-    return { x: base.x! + 5.3, y: base.y! - 0.2}
+  getPlayerX(player: number, context: MaterialContext) {
+    const players = context.rules.players.length
+    const playersX = players === 2 ? [-25, 30] : players === 3 ? [-25, 28, 53] : [-50, -25, 28, 53]
+    return playersX[getRelativePlayerIndex(context, player)]
   }
 
   navigationSorts = []

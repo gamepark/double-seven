@@ -20,8 +20,8 @@ export class StartFamilyHelper extends MaterialRulesPart {
 
     const moves: MaterialMove[] = []
     const playerTilesForThisColor = this.playerTilesRack.filter((item) => item.id === tile)
-    const jockerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
-    if (playerTilesForThisColor.length >= 2 || (playerTilesForThisColor.length === 1 && jockerTiles.length > 0)) {
+    const jokerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
+    if (playerTilesForThisColor.length >= 2 || (playerTilesForThisColor.length === 1 && jokerTiles.length > 0)) {
       const id = uniq(this.playerTilesInGame.getItems().map((it) => it.location.id as number)).length
       moves.push(...playerTilesForThisColor.moveItems(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id })))
     }
@@ -32,11 +32,11 @@ export class StartFamilyHelper extends MaterialRulesPart {
     if (isMoveItemType(MaterialType.Tile)(move) && this.checkIfMoveIsStartFamilyMove(move)) {
       const tile = this.material(MaterialType.Tile).index(move.itemIndex).getItem()?.id as Tile
       const playerTilesForThisColor = this.playerTilesRack.filter((item) => item.id === tile)
-      const jockerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
+      const jokerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
       if (playerTilesForThisColor.length > 0) {
         return [playerTilesForThisColor.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: move.location.id }))]
-      } else if (jockerTiles.length > 0) {
-        return [jockerTiles.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: move.location.id }))]
+      } else if (jokerTiles.length > 0) {
+        return [jokerTiles.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: move.location.id }))]
       }
     }
     return []
