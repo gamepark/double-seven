@@ -4,7 +4,7 @@ import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { Tile } from '@gamepark/double-seven/material/Tile'
 import { CustomMoveType } from '@gamepark/double-seven/rules/CustomMove'
-import { MaterialTutorial, Picture, TutorialStep } from '@gamepark/react-game'
+import { MaterialFocus, MaterialTutorial, Picture, TutorialStep } from '@gamepark/react-game'
 import { isCustomMoveType, isMoveItemType, isMoveItemTypeAtOnce, MaterialGame, MaterialMove } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
 import Seven from '../images/SevenIcon.png'
@@ -345,14 +345,21 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
 
   focusAndMoveTopTile(mustBeRotated = false) {
     return {
-      focus: (game: MaterialGame) => ({
+      focus: (game: MaterialGame): MaterialFocus => ({
         materials: [
           this.material(game, MaterialType.Tile)
             .location(LocationType.TilesPile)
             .location((l) => !mustBeRotated || l.rotation === true)
             .maxBy((item) => item.location.x!)
         ],
-        margin: { bottom: 10 },
+        locations: [],
+        staticItems: [
+          {
+            type: MaterialType.TilesRack,
+            item: { location: { type: LocationType.TilesRack, player: me } }
+          }
+        ],
+        margin: { bottom: 0 },
         scale: 0.5
       }),
       move: {
