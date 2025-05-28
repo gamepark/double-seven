@@ -3,20 +3,20 @@ import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { Tile } from '@gamepark/double-seven/material/Tile'
 import { RuleId } from '@gamepark/double-seven/rules/RuleId'
-import { CardDescription, ItemContext } from '@gamepark/react-game'
-import { isMoveItemType, ItemMoveType, MaterialMove } from '@gamepark/rules-api'
+import { CardDescription, ItemContext, MaterialContext } from '@gamepark/react-game'
+import { isMoveItemType, ItemMoveType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
+import Back from '../images/Tiles/Back.jpg'
+import BlueTile from '../images/Tiles/BlueTile.jpg'
+import GreenTile from '../images/Tiles/GreenTile.jpg'
+import GreyTile from '../images/Tiles/GreyTile.jpg'
+import JockerTile from '../images/Tiles/JockerTile.jpg'
+import MaroonTile from '../images/Tiles/MaroonTile.jpg'
 import OrangeTile from '../images/Tiles/OrangeTile.jpg'
 import PinkTile from '../images/Tiles/PinkTile.jpg'
-import GreenTile from '../images/Tiles/GreenTile.jpg'
 import PurpleTile from '../images/Tiles/PurpleTile.jpg'
-import GreyTile from '../images/Tiles/GreyTile.jpg'
 import RedTile from '../images/Tiles/RedTile.jpg'
-import BlueTile from '../images/Tiles/BlueTile.jpg'
-import MaroonTile from '../images/Tiles/MaroonTile.jpg'
-import JockerTile from '../images/Tiles/JockerTile.jpg'
-import Back from '../images/Tiles/Back.jpg'
-import { TileHelp } from './help/TileHelp'
 import TilesSound from '../sounds/tiles.wav'
+import { TileHelp } from './help/TileHelp'
 
 export class TileDescription extends CardDescription {
   height = 3.9
@@ -75,6 +75,10 @@ export class TileDescription extends CardDescription {
     return (
       noTileAtLocation && move.location.type === LocationType.PlayerTilesInGame && move.location.player === context.player && move.itemIndex === context.index
     )
+  }
+
+  isFlippedOnTable(item: Partial<MaterialItem>, context: MaterialContext) {
+    return (item.location?.type === LocationType.TilesPile && item.location.rotation == true) || super.isFlippedOnTable(item, context)
   }
 
   help = TileHelp
