@@ -1,6 +1,5 @@
 export enum RuleId {
-  ChooseFirstTiles = 1,
-  FlipTile,
+  FlipTile = 2,
   ChooseTwoTiles,
   ChooseThreeTiles,
   DeclareRainbow,
