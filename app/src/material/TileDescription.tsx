@@ -21,6 +21,7 @@ import TilesSound from '../sounds/tiles.wav'
 export class TileDescription extends CardDescription {
   height = 3.9
   width = 2.7
+  borderRadius = 0.25
 
   backImage = Back
 

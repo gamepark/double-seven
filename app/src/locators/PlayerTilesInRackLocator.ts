@@ -6,7 +6,7 @@ import { tileDescription } from '../material/TileDescription'
 import { tilesRackDescription } from '../material/TilesRackDescription'
 
 class PlayerTilesInRackLocator extends FlexLocator {
-  gap = { x: tileDescription.width }
+  gap = { x: tileDescription.width + 0.1 }
 
   lineSize = 5
   lineGap = { y: 2.35, z: 2 }
