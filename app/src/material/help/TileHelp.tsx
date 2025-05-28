@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
+import { RuleId } from '@gamepark/double-seven/rules/RuleId'
 import { linkButtonCss, MaterialHelpProps, Picture, PlayMoveButton } from '@gamepark/react-game'
 import { MaterialMoveBuilder } from '@gamepark/rules-api'
 import { FC } from 'react'
@@ -14,7 +15,7 @@ import RedTile from '../../images/Tiles/RedTile.jpg'
 import BlueTile from '../../images/Tiles/BlueTile.jpg'
 import MaroonTile from '../../images/Tiles/MaroonTile.jpg'
 import JockerTile from '../../images/Tiles/JockerTile.jpg'
-import displayLocationHelp = MaterialMoveBuilder.displayLocationHelp
+import displayRulesHelp = MaterialMoveBuilder.displayRulesHelp
 
 const components = {
   bold: <strong />,
@@ -62,7 +63,7 @@ export const TileHelp: FC<MaterialHelpProps> = (props) => {
           defaults="help.tile.objectives.description"
           components={{
             ...components,
-            action: <PlayMoveButton css={linkButtonCss} move={displayLocationHelp({ type: LocationType.PlayerTilesInRack })} transient />
+            action: <PlayMoveButton css={linkButtonCss} move={displayRulesHelp(RuleId.DoActions)} transient />
           }}
           css={mb0}
         />
