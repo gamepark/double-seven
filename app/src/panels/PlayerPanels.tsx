@@ -57,7 +57,7 @@ const panelPosition = (players: number, index: number) => css`
   width: 28em;
   height: 8.3em;
   border: 0;
-  bottom: 1em;
+  bottom: 2em;
   ${getPanelPosition(players, index)};
 `
 const getPanelPosition = (index: number, nbPlayers: number) => {
@@ -69,7 +69,7 @@ const getPanelPosition = (index: number, nbPlayers: number) => {
 
 const cssForTwoPlayers = [
   css`
-    left: 1em;
+    left: 3em;
   `,
   css`
     right: 10em;

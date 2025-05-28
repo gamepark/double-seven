@@ -1,11 +1,11 @@
 import { Locator, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, Location } from '@gamepark/rules-api'
-import { playerTilesInRackLocator } from './PlayerTilesInRackLocator'
+import { tilesRackLocator } from './TilesRackLocator'
 
 class PlayerDoubleSevenTokenSpaceLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
-    const playerTilesRackCoordinates = playerTilesInRackLocator.getCoordinates(location, context)
-    return { x: playerTilesRackCoordinates.x! + 15, y: playerTilesRackCoordinates.y! + 7 }
+    const { x = 0, y = 0 } = tilesRackLocator.getCoordinates(location, context)
+    return { x: x + 10, y: y + 7 }
   }
 
   navigationSorts = []

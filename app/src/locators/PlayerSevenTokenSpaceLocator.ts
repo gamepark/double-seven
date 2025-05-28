@@ -1,19 +1,15 @@
 import { ListLocator, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, Location } from '@gamepark/rules-api'
-import { playerTilesInRackLocator } from './PlayerTilesInRackLocator'
+import { sevenTokenDescription } from '../material/SevenTokenDescription'
+import { tilesRackLocator } from './TilesRackLocator'
 
 class PlayerSevenTokenSpaceLocator extends ListLocator {
-  gap = { x: 2.3 }
+  gap = { x: sevenTokenDescription.width + 1 }
+  maxCount = 3
 
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
-    const base = this.getBaseCoordinates(location, context)
-    const locationX = location.x ?? 0
-    return { x: base.x + locationX * this.gap.x, y: base.y }
-  }
-
-  getBaseCoordinates(location: Location, context: MaterialContext) {
-    const playerTilesRackCoordinates = playerTilesInRackLocator.getCoordinates(location, context)
-    return { x: playerTilesRackCoordinates.x! - 1, y: playerTilesRackCoordinates.y! + 10 }
+    const { x = 0, y = 0 } = tilesRackLocator.getCoordinates(location, context)
+    return { x: x - 7, y: y + 7 }
   }
 
   navigationSorts = []
