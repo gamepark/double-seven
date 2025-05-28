@@ -8,7 +8,7 @@ class TilesRackLocator extends Locator {
 
   getPlayerX(player: number, context: MaterialContext) {
     const players = context.rules.players.length
-    const playersX = players === 2 ? [-25, 30] : players === 3 ? [-25, 28, 53] : [-50, -25, 28, 53]
+    const playersX = players === 2 ? [-35, 40] : players === 3 ? [-25, 28, 53] : [-50, -25, 28, 53]
     return playersX[getRelativePlayerIndex(context, player)]
   }
 
