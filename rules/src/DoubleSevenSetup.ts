@@ -19,7 +19,6 @@ export class DoubleSevenSetup extends MaterialGameSetup<number, MaterialType, Lo
     this.players.forEach((player) => {
       this.setupPlayer(player)
     })
-    this.setupFlipFirstTile()
   }
 
   setupTilesPile() {
@@ -32,12 +31,6 @@ export class DoubleSevenSetup extends MaterialGameSetup<number, MaterialType, Lo
     })
   }
 
-  setupFlipFirstTile() {
-    this.material(MaterialType.Tile)
-      .location(LocationType.TilesPile)
-      .moveItem(({ location }) => ({ ...location, rotation: false }))
-  }
-
   setupPlayer(player: number) {
     this.material(MaterialType.Tile)
       .location(LocationType.TilesPile)
@@ -46,6 +39,6 @@ export class DoubleSevenSetup extends MaterialGameSetup<number, MaterialType, Lo
   }
 
   start() {
-    this.startPlayerTurn(RuleId.ChooseTwoTiles, this.players[0])
+    this.startPlayerTurn(RuleId.FlipTile, this.players[0])
   }
 }

@@ -2,45 +2,41 @@ import { DoubleSevenSetup } from '@gamepark/double-seven/DoubleSevenSetup'
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { getTiles, Tile } from '@gamepark/double-seven/material/Tile'
-import { shuffle } from 'lodash'
 
 export const me = 1
 export const opponent = 2
+
 export class TutorialSetup extends DoubleSevenSetup {
   setupTilesPile() {
-    const tiles = shuffle(getTiles())
-    tiles.forEach((tile) => {
-      const z = tile === Tile.JokerTile ? 10 : undefined
-      this.material(MaterialType.Tile).createItem({
-        location: { type: LocationType.TilesPile, id: tile, z, rotation: true },
-        id: tile
-      })
-    })
-  }
-
-  setupPlayer(player: number) {
-    if (player === 2) {
-      this.moveSpecificTile(Tile.MaroonTile, player)
-      this.moveSpecificTile(Tile.RedTile, player)
-      this.moveSpecificTile(Tile.RedTile, player)
-    } else {
-      this.moveSpecificTile(Tile.MaroonTile, player)
-      this.moveSpecificTile(Tile.RedTile, player)
-      this.moveSpecificTile(Tile.PurpleTile, player)
+    const items = getTiles().map((id) => ({ id, location: { type: LocationType.TilesPile, rotation: true } }))
+    this.material(MaterialType.Tile).createItems(items)
+    // Isolate tiles required for the tutorial
+    this.material(MaterialType.Tile).id(Tile.RedTile).limit(3).moveItems({ type: LocationType.TilesDiscard })
+    this.material(MaterialType.Tile).id(Tile.MaroonTile).limit(2).moveItems({ type: LocationType.TilesDiscard })
+    this.material(MaterialType.Tile).id(Tile.PinkTile).limit(1).moveItems({ type: LocationType.TilesDiscard })
+    this.material(MaterialType.Tile).id(Tile.PurpleTile).limit(1).moveItems({ type: LocationType.TilesDiscard })
+    this.material(MaterialType.Tile).id(Tile.BlueTile).limit(1).moveItems({ type: LocationType.TilesDiscard })
+    this.material(MaterialType.Tile).id(Tile.GreyTile).limit(3).moveItems({ type: LocationType.TilesDiscard })
+    this.material(MaterialType.Tile).id(Tile.JokerTile).limit(1).moveItems({ type: LocationType.TilesDiscard })
+    // Shuffle the other tiles
+    this.material(MaterialType.Tile).location(LocationType.TilesPile).shuffle()
+    // Put back the tiles we want to draw on top
+    const drawOrder = [Tile.BlueTile, Tile.GreyTile, Tile.GreyTile, Tile.GreyTile, Tile.MaroonTile, Tile.JokerTile]
+    for (const tile of drawOrder.reverse()) {
+      this.material(MaterialType.Tile).location(LocationType.TilesDiscard).id(tile).moveItem({ type: LocationType.TilesPile, rotation: true })
     }
   }
 
-  setupFlipFirstTile() {
-    this.material(MaterialType.Tile)
-      .location(LocationType.TilesPile)
-      .filter((it) => it.id === Tile.BlueTile)
-      .moveItem(({ location }) => ({ ...location, rotation: false }))
-  }
-
-  moveSpecificTile(tile: Tile, player: number) {
-    this.material(MaterialType.Tile)
-      .location(LocationType.TilesPile)
-      .filter((it) => it.id === tile)
-      .moveItem(() => ({ type: LocationType.PlayerTilesInRack, player, rotation: true }))
+  setupPlayer(player: number) {
+    const reservedTiles = this.material(MaterialType.Tile).location(LocationType.TilesDiscard)
+    const location = { type: LocationType.PlayerTilesInRack, player, rotation: true }
+    if (player === me) {
+      reservedTiles.id(Tile.MaroonTile).moveItem(location)
+      reservedTiles.id(Tile.RedTile).moveItem(location)
+      reservedTiles.id(Tile.PurpleTile).moveItem(location)
+    } else {
+      reservedTiles.id(Tile.PinkTile).moveItem(location)
+      reservedTiles.id(Tile.RedTile).limit(2).moveItems(location)
+    }
   }
 }

@@ -18,6 +18,7 @@ gameAnimations
   })
   .none()
 
+gameAnimations.when().rule(RuleId.DeclareRainbow).move(isMoveItemsAtOnce).mine().none()
 gameAnimations.when().rule(RuleId.ChooseTileAfterRainbow).move(isMoveItemsAtOnce).mine().none()
 
 gameAnimations.when().rule(RuleId.ChooseTileAfterRainbow).move(isMoveItemsAtOnce).sound(false)

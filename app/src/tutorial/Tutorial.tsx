@@ -74,33 +74,24 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         text: () => <Trans defaults="tuto.step.4" components={BaseComponents} />,
         position: { x: 0, y: 20 }
       },
-      ...this.focusOnTileAndMoveToChooseTile(Tile.GreyTile)
+      ...this.focusAndMoveTopTile(true)
     },
     {
       popup: {
         text: () => <Trans defaults="tuto.step.5" components={BaseComponents} />,
         position: { x: 0, y: 20 }
       },
-      focus: (game) => ({
-        materials: [
-          this.material(game, MaterialType.Tile)
-            .location(LocationType.TilesPile)
-            .location((loc) => loc.rotation === false)
-        ],
-        scale: 0.1
-      }),
-      move: {
-        filter: (move: MaterialMove, game: MaterialGame) => {
-          if (!isMoveItemType(MaterialType.Tile)(move)) return false
-          const tile = this.material(game, MaterialType.Tile).location(LocationType.TilesPile).index(move.itemIndex).getItem()
-          return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInRack && tile?.id
-        }
-      }
+      ...this.focusAndMoveTopTile()
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.6" components={BaseComponents} />
+        text: () => <Trans defaults="tuto.step.6" components={BaseComponents} />,
+        position: { x: 20, y: -10 }
       },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.Tile).location(LocationType.PlayerTilesInRack).player(me)],
+        scale: 0.6
+      }),
       move: {
         filter: (move) => isCustomMoveType(CustomMoveType.DeclareRainbow)(move)
       }
@@ -110,7 +101,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         text: () => <Trans defaults="tuto.step.7" components={BaseComponents} />,
         position: { x: 0, y: 20 }
       },
-      ...this.focusOnTileAndMoveToChooseTile(Tile.GreyTile)
+      ...this.focusAndMoveTopTile()
     },
     {
       popup: {
@@ -119,8 +110,13 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.9" components={BaseComponents} />
+        text: () => <Trans defaults="tuto.step.9" components={BaseComponents} />,
+        position: { x: 20, y: -10 }
       },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.Tile).location(LocationType.PlayerTilesInRack).player(me)],
+        scale: 0.6
+      }),
       move: {
         filter: (move) => {
           return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInGame && move.location.player === me
@@ -137,12 +133,26 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       move: {
-        player: opponent
+        player: opponent,
+        filter: (move: MaterialMove, game: MaterialGame) =>
+          isMoveItemType(MaterialType.Tile)(move) &&
+          move.itemIndex ===
+            this.material(game, MaterialType.Tile)
+              .location(LocationType.TilesPile)
+              .minBy((item) => item.location.x!)
+              .getIndex()
       }
     },
     {
       move: {
-        player: opponent
+        player: opponent,
+        filter: (move: MaterialMove, game: MaterialGame) =>
+          isMoveItemType(MaterialType.Tile)(move) &&
+          move.itemIndex ===
+            this.material(game, MaterialType.Tile)
+              .location(LocationType.TilesPile)
+              .minBy((item) => item.location.x!)
+              .getIndex()
       }
     },
     {
@@ -180,19 +190,24 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
         text: () => <Trans defaults="tuto.step.12" components={BaseComponents} />,
         position: { x: 0, y: 20 }
       },
-      ...this.focusOnTileAndMoveToChooseTile(Tile.GreyTile)
+      ...this.focusAndMoveTopTile()
     },
     {
       popup: {
         text: () => <Trans defaults="tuto.step.13" components={BaseComponents} />,
         position: { x: 0, y: 20 }
       },
-      ...this.focusOnTileAndMoveToChooseTile(Tile.BlueTile)
+      ...this.focusAndMoveTopTile()
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.14" components={BaseComponents} />
+        text: () => <Trans defaults="tuto.step.14" components={BaseComponents} />,
+        position: { x: 20, y: -10 }
       },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.Tile).location(LocationType.PlayerTilesInRack).player(me)],
+        scale: 0.6
+      }),
       move: {
         filter: (move) => {
           return (
@@ -206,8 +221,13 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.15" components={BaseComponents} />
+        text: () => <Trans defaults="tuto.step.15" components={BaseComponents} />,
+        position: { x: 20, y: -10 }
       },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.Tile).player(me)],
+        scale: 0.6
+      }),
       move: {
         filter: (move) => {
           return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInGame && move.location.player === me
@@ -216,8 +236,17 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.16" components={BaseComponents} />
+        text: () => <Trans defaults="tuto.step.16" components={BaseComponents} />,
+        position: { y: -20 }
       },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.Tile)
+            .location(LocationType.PlayerTilesInGame)
+            .id((id) => id === Tile.MaroonTile || id === Tile.RedTile)
+        ],
+        margin: { left: 3, right: 10, top: 10 }
+      }),
       move: {
         filter: (move) => {
           return isMoveItemTypeAtOnce(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInGame && move.location.player === opponent
@@ -226,8 +255,13 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.17" components={BaseComponents} />
+        text: () => <Trans defaults="tuto.step.17" components={BaseComponents} />,
+        position: { x: 20, y: -10 }
       },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.Tile).player(me)],
+        scale: 0.6
+      }),
       move: {
         filter: (move) => {
           return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInGame && move.location.player === me
@@ -236,8 +270,15 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.step.18" components={BaseComponents} />
+        text: () => <Trans defaults="tuto.step.18" components={BaseComponents} />,
+        position: { x: -20, y: -20 }
       },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.Tile).location(LocationType.PlayerTilesInRack).player(me),
+          this.material(game, MaterialType.Tile).location(LocationType.TilesPile)
+        ]
+      }),
       move: {
         filter: (move) => {
           return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.TilesPile
@@ -247,7 +288,7 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       move: {}
     },
-    this.focusOnTileAndMoveToChooseTile(Tile.JokerTile),
+    this.focusAndMoveTopTile(true),
     {
       popup: {
         text: () => <Trans defaults="tuto.step.19" components={BaseComponents} />
@@ -266,7 +307,8 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     {
       popup: {
         text: () => <Trans defaults="tuto.step.21" components={BaseComponents} />
-      }
+      },
+      move: {}
     },
     {
       popup: {
@@ -301,22 +343,27 @@ export class Tutorial extends MaterialTutorial<number, MaterialType, LocationTyp
     }
   ]
 
-  focusOnTileAndMoveToChooseTile(tileToPlay: Tile) {
+  focusAndMoveTopTile(mustBeRotated = false) {
     return {
       focus: (game: MaterialGame) => ({
         materials: [
           this.material(game, MaterialType.Tile)
             .location(LocationType.TilesPile)
-            .location((loc) => loc.id === tileToPlay)
+            .location((l) => !mustBeRotated || l.rotation === true)
+            .maxBy((item) => item.location.x!)
         ],
-        scale: 0.1
+        margin: { bottom: 10 },
+        scale: 0.5
       }),
       move: {
-        filter: (move: MaterialMove, game: MaterialGame) => {
-          if (!isMoveItemType(MaterialType.Tile)(move)) return false
-          const tile = this.material(game, MaterialType.Tile).location(LocationType.TilesPile).index(move.itemIndex).getItem()
-          return isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInRack && tile?.location.id === tileToPlay
-        }
+        filter: (move: MaterialMove, game: MaterialGame) =>
+          isMoveItemType(MaterialType.Tile)(move) &&
+          move.itemIndex ===
+            this.material(game, MaterialType.Tile)
+              .location(LocationType.TilesPile)
+              .location((l) => !mustBeRotated || l.rotation === true)
+              .maxBy((item) => item.location.x!)
+              .getIndex()
       }
     }
   }
