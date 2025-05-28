@@ -45,6 +45,7 @@ export const PlayerPanels = () => {
             }
           ]}
           speak={speakingPlayer === player.id && speak}
+          activeRing
         />
       ))}
     </>,
