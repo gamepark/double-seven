@@ -10,6 +10,9 @@ class TilesPileLocator extends PileLocator {
 
   getItemCoordinates(item: MaterialItem, context: ItemContext) {
     const coordinates = super.getItemCoordinates(item, context)
+    if (item.location.z) {
+      coordinates.z = item.location.z
+    }
     if (!item.location.rotation) {
       coordinates.z = 10
     }

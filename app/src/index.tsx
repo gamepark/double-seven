@@ -16,6 +16,7 @@ import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
 import { DoubleSevenScoring } from './scoring/DoubleSevenScoring'
 import translations from './translations.json'
+import { Tutorial } from './tutorial/Tutorial'
 
 setupTranslation(translations, { debug: false })
 
@@ -27,6 +28,7 @@ ReactDOM.render(
       optionsSpec={DoubleSevenOptionsSpec}
       GameSetup={DoubleSevenSetup}
       material={Material}
+      tutorial={new Tutorial()}
       scoring={new DoubleSevenScoring()}
       locators={Locators}
       animations={gameAnimations}

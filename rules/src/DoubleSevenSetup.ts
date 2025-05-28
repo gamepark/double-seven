@@ -15,6 +15,14 @@ export class DoubleSevenSetup extends MaterialGameSetup<number, MaterialType, Lo
 
   setupMaterial(_options: DoubleSevenOptions) {
     this.material(MaterialType.DoubleSevenToken).createItem({ location: { type: LocationType.DoubleSevenTokenIdleSpace, rotation: true } })
+    this.setupTilesPile()
+    this.players.forEach((player) => {
+      this.setupPlayer(player)
+    })
+    this.setupFlipFirstTile()
+  }
+
+  setupTilesPile() {
     const tiles = shuffle(getTiles())
     tiles.forEach((tile) => {
       this.material(MaterialType.Tile).createItem({
@@ -22,16 +30,22 @@ export class DoubleSevenSetup extends MaterialGameSetup<number, MaterialType, Lo
         id: tile
       })
     })
+  }
 
-    this.players.forEach((player) => {
-      this.material(MaterialType.Tile)
-        .location(LocationType.TilesPile)
-        .limit(3)
-        .moveItems(() => ({ type: LocationType.PlayerTilesInRack, player, rotation: true }))
-    })
+  setupFlipFirstTile() {
+    this.material(MaterialType.Tile)
+      .location(LocationType.TilesPile)
+      .moveItem(({ location }) => ({ ...location, rotation: false }))
+  }
+
+  setupPlayer(player: number) {
+    this.material(MaterialType.Tile)
+      .location(LocationType.TilesPile)
+      .limit(3)
+      .moveItems(() => ({ type: LocationType.PlayerTilesInRack, player, rotation: true }))
   }
 
   start() {
-    this.startPlayerTurn(RuleId.FlipTile, this.players[0])
+    this.startPlayerTurn(RuleId.ChooseTwoTiles, this.players[0])
   }
 }
