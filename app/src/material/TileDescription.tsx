@@ -66,8 +66,10 @@ export class TileDescription extends CardDescription {
     if (!isMoveItemType(MaterialType.Tile)(move)) return false
 
     const noTileAtLocation =
-      context.rules.material(MaterialType.Tile).location((loc) => loc.type === move.location.type && loc.id === move.location.id && loc.x === move.location.x)
-        .length === 0
+      context.rules
+        .material(MaterialType.Tile)
+        .location((loc) => loc.type === move.location.type && loc.id === move.location.id && loc.x === move.location.x)
+        .player(move.location.player).length === 0
 
     return (
       noTileAtLocation && move.location.type === LocationType.PlayerTilesInGame && move.location.player === context.player && move.itemIndex === context.index
