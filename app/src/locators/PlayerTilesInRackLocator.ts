@@ -2,9 +2,7 @@ import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { DropAreaDescription, FlexLocator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
-import { ActionsHelp } from '../material/help/ActionsHelp'
 import { tileDescription } from '../material/TileDescription'
-import { tilesRackDescription } from '../material/TilesRackDescription'
 
 class PlayerTilesInRackLocator extends FlexLocator {
   parentItemType = MaterialType.TilesRack
@@ -23,21 +21,13 @@ class PlayerTilesInRackLocator extends FlexLocator {
 
   positionOnParent = { x: 22, y: 0 }
 
-  getDropLocations() {
-    return [{ type: LocationType.PlayerTilesInRack }]
-  }
-
-  locationDescription = new PlayerTilesInRackDescription(tilesRackDescription)
+  locationDescription = new DropAreaDescription({
+    width: 20,
+    height: 10,
+    borderRadius: 0.5
+  })
 
   navigationSorts = []
-}
-
-export class PlayerTilesInRackDescription extends DropAreaDescription {
-  width = tilesRackDescription.width
-  height = tilesRackDescription.height * 1.8
-  borderRadius = 0.4
-
-  help = ActionsHelp
 }
 
 export const playerTilesInRackLocator = new PlayerTilesInRackLocator()

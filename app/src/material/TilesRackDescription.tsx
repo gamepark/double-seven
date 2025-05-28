@@ -18,6 +18,10 @@ export class TilesRackDescription extends BoardDescription {
     return items
   }
 
+  getLocations(item: MaterialItem) {
+    return [{ type: LocationType.PlayerTilesInRack, player: item.location.player }]
+  }
+
   image = Rack
 
   displayHelp = () => displayRulesHelp(RuleId.DiscardTile)
