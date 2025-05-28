@@ -28,8 +28,8 @@ export class TileDescription extends CardDescription {
   images = images
 
   sounds = {
-    [ItemMoveType.MoveAtOnce]: { sound: TilesSound, volume: 0.4 },
-    [ItemMoveType.Move]: { sound: TilesSound, volume: 0.4 }
+    [ItemMoveType.MoveAtOnce]: { sound: TilesSound, volume: 0.4, delay: 0.7 },
+    [ItemMoveType.Move]: { sound: TilesSound, volume: 0.4, delay: 0.7 }
   }
 
   canShortClick(move: MaterialMove, context: ItemContext): boolean {
