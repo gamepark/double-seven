@@ -54,13 +54,43 @@ export class DoubleSevenScoring implements ScoringDescription {
     const scoreHelper = new ScoreHelper(rules.game)
     switch (key) {
       case ScoringKeys.Tile:
-        return scoreHelper.getTilesScore(player)
+        return (
+          <Trans
+            defaults="game-over.score.points"
+            values={{
+              points: scoreHelper.getTilesScore(player)
+            }}
+          />
+        )
       case ScoringKeys.SevenToken:
-        return scoreHelper.getSevenTokenScore(player)
+        return (
+          <Trans
+            defaults="game-over.score.points"
+            values={{
+              points: scoreHelper.getSevenTokenScore(player)
+            }}
+          />
+        )
       case ScoringKeys.DoubleSevenToken:
-        return scoreHelper.getDoubleSevenTokenScore(player)
+        return (
+          <Trans
+            defaults="game-over.score.points"
+            values={{
+              points: scoreHelper.getDoubleSevenTokenScore(player)
+            }}
+          />
+        )
       case ScoringKeys.Total:
-        return <div css={bold}>{scoreHelper.getScore(player)}</div>
+        return (
+          <div css={bold}>
+            <Trans
+              defaults="game-over.score.points"
+              values={{
+                points: scoreHelper.getScore(player)
+              }}
+            />
+          </div>
+        )
     }
   }
 }
