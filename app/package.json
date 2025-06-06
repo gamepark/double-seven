@@ -1,6 +1,6 @@
 {
   "name": "@gamepark/double-seven-app",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "private": true,
   "description": "The user interface of Double Seven adaptation for Game Park",
   "author": "Romain Fromi <romain@game-park.com> (https://game-park.com/)",
