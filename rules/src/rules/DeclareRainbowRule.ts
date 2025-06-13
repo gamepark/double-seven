@@ -24,9 +24,10 @@ export class DeclareRainbowRule extends PlayerTurnRule {
   }
 
   canDeclareRainbow(): boolean {
-    const tilesWithoutJocker = this.playerTiles.getItems().filter((it) => it.id !== Tile.JokerTile)
-    const nbTilesGroupedByColor = uniqBy(tilesWithoutJocker, 'id').length
-    return nbTilesGroupedByColor >= 5 && nbTilesGroupedByColor === tilesWithoutJocker.length
+    const tiles = this.playerTiles.getItems()
+    if (tiles.some((it) => it.id === Tile.JokerTile)) return false
+    const nbTilesGroupedByColor = uniqBy(tiles, 'id').length
+    return nbTilesGroupedByColor >= 5 && nbTilesGroupedByColor === tiles.length
   }
 
   onCustomMove(move: CustomMove): MaterialMove[] {
