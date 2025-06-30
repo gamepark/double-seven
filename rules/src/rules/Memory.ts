@@ -3,5 +3,6 @@ export enum MemoryType {
   PlayerFamilyWithSevenToken,
   PlayerWhoEndedGame,
   PlayerScore,
-  PlayerAlreadyGetTwoForOneAction
+  PlayerAlreadyGetTwoForOneAction,
+  TilesUsedForTwoForOne
 }
