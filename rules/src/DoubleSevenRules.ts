@@ -11,6 +11,7 @@ import { FlipTileRule } from './rules/FlipTileRule'
 import { ScoreHelper } from './rules/helper/ScoreHelper'
 import { MemoryType } from './rules/Memory'
 import { RuleId } from './rules/RuleId'
+import { StartFamilyRule } from './rules/StartFamilyRule'
 import { TwoForOneActionGetTileRule } from './rules/TwoForOneActionGetTileRule'
 import { TwoForOneActionRule } from './rules/TwoForOneActionRule'
 
@@ -32,7 +33,8 @@ export class DoubleSevenRules
     [RuleId.DoActions]: DoActionsRule,
     [RuleId.TwoForOneAction]: TwoForOneActionRule,
     [RuleId.TwoForOneActionGetTile]: TwoForOneActionGetTileRule,
-    [RuleId.DiscardTile]: DiscardTileRule
+    [RuleId.DiscardTile]: DiscardTileRule,
+    [RuleId.StartFamily]: StartFamilyRule
   }
 
   giveTime(): number {

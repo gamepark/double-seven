@@ -3,6 +3,7 @@ import { uniq } from 'lodash'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { Tile } from '../../material/Tile'
+import { RuleId } from '../RuleId'
 
 export class StartFamilyHelper extends MaterialRulesPart {
   player?: number
@@ -33,7 +34,9 @@ export class StartFamilyHelper extends MaterialRulesPart {
       const tile = this.material(MaterialType.Tile).index(move.itemIndex).getItem()?.id as Tile
       const playerTilesForThisColor = this.playerTilesRack.filter((item) => item.id === tile)
       const jokerTiles = this.playerTilesRack.filter((item) => item.id === Tile.JokerTile)
-      if (playerTilesForThisColor.length > 0) {
+      if (playerTilesForThisColor.length > 0 && jokerTiles.length > 0) {
+        return [this.startRule(RuleId.StartFamily)]
+      } else if (playerTilesForThisColor.length > 0) {
         return [playerTilesForThisColor.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: move.location.id }))]
       } else if (jokerTiles.length > 0) {
         return [jokerTiles.moveItem(() => ({ type: LocationType.PlayerTilesInGame, player: this.player, id: move.location.id }))]

@@ -8,6 +8,7 @@ import { DeclareRainbowHeader } from './DeclareRainbowHeader'
 import { DiscardTileHeader } from './DiscardTileHeader'
 import { FlipTileHeader } from './FlipTileHeader'
 import { DoActionsHeader } from './DoActionsHeader'
+import { StartFamilyHeader } from './StartFamilyHeader'
 import { TwoForOneActionGetTileHeader } from './TwoForOneActionGetTileHeader'
 import { TwoForOneActionHeader } from './TwoForOneActionHeader'
 
@@ -20,5 +21,6 @@ export const Headers: Partial<Record<RuleId, ComponentType>> = {
   [RuleId.DoActions]: DoActionsHeader,
   [RuleId.TwoForOneAction]: TwoForOneActionHeader,
   [RuleId.TwoForOneActionGetTile]: TwoForOneActionGetTileHeader,
-  [RuleId.DiscardTile]: DiscardTileHeader
+  [RuleId.DiscardTile]: DiscardTileHeader,
+  [RuleId.StartFamily]: StartFamilyHeader
 }

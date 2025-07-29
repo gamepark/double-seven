@@ -7,5 +7,6 @@ export enum RuleId {
   DoActions,
   TwoForOneAction,
   TwoForOneActionGetTile,
-  DiscardTile
+  DiscardTile,
+  StartFamily
 }
