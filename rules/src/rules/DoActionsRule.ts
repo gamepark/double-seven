@@ -60,7 +60,7 @@ export class DoActionsRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
     moves.push(...this.startFamilyHelper.addSecondTileForStartFamily(move))
     moves.push(...this.twoForOneHelper.checkAndMoveToTwoForOneAction(move))
-    if (isMoveItem(move) && move.location.type === LocationType.PlayerTilesInGame) {
+    if (isMoveItem(move) && move.location.type === LocationType.PlayerTilesInGame && move.location.x === undefined) {
       if (this.playerTilesInRack.length === 0 && this.remind<number | undefined>(MemoryType.PlayerWhoEndedGame) !== undefined) {
         moves.push(this.customMove(CustomMoveType.Empty))
       }
