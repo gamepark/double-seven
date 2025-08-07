@@ -1,4 +1,4 @@
-import { CustomMove, ItemMove, MaterialItem, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { CustomMove, isMoveItem, ItemMove, MaterialItem, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { getFamilies, Tile, tiles } from '../material/Tile'
@@ -10,6 +10,7 @@ import { PassHelper } from './helper/PassHelper'
 import { SevenTokenHelper } from './helper/SevenTokenHelper'
 import { StartFamilyHelper } from './helper/StartFamilyHelper'
 import { TwoForOneHelper } from './helper/TwoForOneHelper'
+import { MemoryType } from './Memory'
 
 export class DoActionsRule extends PlayerTurnRule {
   startFamilyHelper = new StartFamilyHelper(this.game)
@@ -59,6 +60,11 @@ export class DoActionsRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
     moves.push(...this.startFamilyHelper.addSecondTileForStartFamily(move))
     moves.push(...this.twoForOneHelper.checkAndMoveToTwoForOneAction(move))
+    if (isMoveItem(move) && move.location.type === LocationType.PlayerTilesInGame) {
+      if (this.playerTilesInRack.length === 0 && this.remind<number | undefined>(MemoryType.PlayerWhoEndedGame) !== undefined) {
+        moves.push(this.customMove(CustomMoveType.Empty))
+      }
+    }
     return moves
   }
 
