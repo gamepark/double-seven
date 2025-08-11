@@ -1,4 +1,13 @@
-import { CompetitiveScore, MaterialGame, MaterialItem, MaterialMove, PositiveSequenceStrategy, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
+import {
+  CompetitiveScore,
+  ItemMove,
+  MaterialGame,
+  MaterialItem,
+  MaterialMove,
+  PositiveSequenceStrategy,
+  SecretMaterialRules,
+  TimeLimit
+} from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { ChooseThreeTilesRule } from './rules/ChooseThreeTilesRule'
@@ -60,12 +69,12 @@ export class DoubleSevenRules
     }
   }
 
-  protected afterItemMove(): MaterialMove[] {
+  protected afterItemMove(move: ItemMove): MaterialMove[] {
     const activePlayer = this.getActivePlayer()
     if (activePlayer) {
       this.memorize(MemoryType.PlayerScore, this.scoreHelper.getScore(activePlayer), activePlayer)
     }
-    return []
+    return super.afterItemMove(move)
   }
 
   getScore(playerId: number): number {
