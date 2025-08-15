@@ -21,6 +21,6 @@ export class TwoForOneActionGetTileRule extends ChooseTwoTilesRule {
     const tilesCantTake = this.remind<Tile[] | undefined>(MemoryType.TilesUsedForTwoForOne) ?? []
     return this.material(MaterialType.Tile)
       .location(LocationType.TilesPile)
-      .filter((it) => !tilesCantTake.includes(it.id as Tile))
+      .index((index) => !tilesCantTake.includes(index))
   }
 }

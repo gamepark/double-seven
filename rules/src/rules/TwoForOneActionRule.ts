@@ -17,7 +17,7 @@ export class TwoForOneActionRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.TilesPile) {
-      this.memorize<Tile[]>(MemoryType.TilesUsedForTwoForOne, (old) => [...old, this.material(MaterialType.Tile).index(move.itemIndex).getItem<Tile>()!.id])
+      this.memorize<Tile[]>(MemoryType.TilesUsedForTwoForOne, (old) => [...old, move.itemIndex])
       return [this.startRule(RuleId.TwoForOneActionGetTile)]
     }
     return []

@@ -33,7 +33,7 @@ export class TwoForOneHelper extends MaterialRulesPart {
 
   checkAndMoveToTwoForOneAction(move: MaterialMove): MaterialMove[] {
     if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.TilesPile) {
-      this.memorize(MemoryType.TilesUsedForTwoForOne, [this.material(MaterialType.Tile).index(move.itemIndex).getItem()!.id])
+      this.memorize(MemoryType.TilesUsedForTwoForOne, [move.itemIndex])
       return [this.startRule(RuleId.TwoForOneAction)]
     }
     return []
