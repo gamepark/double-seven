@@ -3,7 +3,7 @@ import { ItemContext, PileLocator } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 
 class TilesPileLocator extends PileLocator {
-  radius = { x: 13, y: 20}
+  radius = { x: 13, y: 20 }
   coordinates = { x: 3, y: 0 }
   limit = 91
   minimumDistance = 2

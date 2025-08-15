@@ -28,8 +28,8 @@ export class DoActionsRule extends PlayerTurnRule {
     const playerFamilies: MaterialItem[][] = getFamilies(this.playerTilesInGame)
     playerFamilies.forEach((family) => {
       const tile = family.find((t: MaterialItem) => (t.id as Tile) !== Tile.JokerTile)
-      moves.push(...this.expandFamilyHelper.addMovesForExpandFamily(tile?.id as Tile, tile!.location.id))
-      moves.push(...this.exchangeFamilyHelper.addMovesForExchangeFamily(tile!.location.id))
+      moves.push(...this.expandFamilyHelper.addMovesForExpandFamily(tile?.id as Tile, tile!.location.id as number))
+      moves.push(...this.exchangeFamilyHelper.addMovesForExchangeFamily(tile!.location.id as number))
     })
     tiles.forEach((tile) => {
       moves.push(...this.startFamilyHelper.addMovesForStartFamily(tile))

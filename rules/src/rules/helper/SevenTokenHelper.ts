@@ -1,6 +1,7 @@
 import { isMoveItemType, MaterialGame, MaterialMove, MaterialRulesPart, MoveItem } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
+import { Tile } from '../../material/Tile'
 import { MemoryType } from '../Memory'
 import { ExpandFamilyHelper } from './ExpandFamilyHelper'
 
@@ -42,7 +43,7 @@ export class SevenTokenHelper extends MaterialRulesPart {
     const family = this.playerTilesInGame.filter((it) => it.location.id === move.location.id)
     const oldLocation = this.material(MaterialType.Tile).index(move.itemIndex).getItem()?.location.type
 
-    return family.length >= 6 && !playerFamiliesWithSevenToken.includes(move.location.id) && oldLocation === LocationType.PlayerTilesInRack
+    return family.length >= 6 && !playerFamiliesWithSevenToken.includes(move.location.id as Tile) && oldLocation === LocationType.PlayerTilesInRack
   }
 
   get playerTilesInGame() {

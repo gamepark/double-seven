@@ -1,4 +1,4 @@
-import { isCustomMove, isMoveItem, isMoveItemType, MaterialGame, MaterialItem, MaterialMove, RandomBot } from '@gamepark/rules-api'
+import { isCustomMove, isMoveItem, isMoveItemType, MaterialGame, MaterialMove, RandomBot } from '@gamepark/rules-api'
 import { DoubleSevenRules } from '../DoubleSevenRules'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
@@ -36,8 +36,8 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
       .material(MaterialType.Tile)
       .location(LocationType.PlayerTilesInGame)
       .player(rules.game.rule?.player)
-      .getItems()
-      .map((it: MaterialItem) => it.id)
+      .getItems<Tile>()
+      .map((it) => it.id)
 
     const moves: MaterialMove[] = []
     playerTilesInGame.forEach((id) => {
@@ -51,10 +51,11 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
       .material(MaterialType.Tile)
       .location(LocationType.PlayerTilesInRack)
       .player(rules.game.rule?.player)
-      .getItems()
-      .map((it: MaterialItem) => it.id)
+      .getItems<Tile>()
+      .map((it) => it.id)
 
-    if (playerTilesInRack.includes(visibleTile.getItem()?.id)) return legalMoves.filter((it) => isMoveItem(it) && it.itemIndex === visibleTile.getIndex())
+    const tile = visibleTile.getItem<Tile>()
+    if (tile && playerTilesInRack.includes(tile.id)) return legalMoves.filter((it) => isMoveItem(it) && it.itemIndex === visibleTile.getIndex())
 
     return legalMoves
   }
@@ -106,14 +107,14 @@ export class DoubleSevenBot extends RandomBot<MaterialGame<number, MaterialType,
         const tileInLocation = rules
           .material(MaterialType.Tile)
           .location((loc) => loc.type === it.location.type && it.location.player === loc.player && it.location.y === loc.y && it.location.x === loc.x)
-          .getItem()
+          .getItem<Tile>()
         const playerTilesInRack = rules
           .material(MaterialType.Tile)
           .location(LocationType.PlayerTilesInRack)
           .player(rules.game.rule?.player)
-          .getItems()
-          .map((t: MaterialItem) => t.id)
-        return playerTilesInRack.includes(tileInLocation?.id)
+          .getItems<Tile>()
+          .map((t) => t.id)
+        return tileInLocation && playerTilesInRack.includes(tileInLocation.id)
       })
     if (exchangeFamily.length > 0) return exchangeFamily
 

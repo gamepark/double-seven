@@ -10,7 +10,7 @@ export class TwoForOneActionGetTileRule extends ChooseTwoTilesRule {
   nbTileToGet = 1
   nextRule = RuleId.DoActions
 
-  beforeItemMove(move: ItemMove<number, number, number>): MaterialMove[] {
+  beforeItemMove(move: ItemMove): MaterialMove[] {
     if (isMoveItemType(MaterialType.Tile)(move) && move.location.type === LocationType.PlayerTilesInRack) {
       this.forget(MemoryType.TilesUsedForTwoForOne)
     }
@@ -19,6 +19,8 @@ export class TwoForOneActionGetTileRule extends ChooseTwoTilesRule {
 
   get tilesInPile() {
     const tilesCantTake = this.remind<Tile[] | undefined>(MemoryType.TilesUsedForTwoForOne) ?? []
-    return this.material(MaterialType.Tile).location(LocationType.TilesPile).filter(it => !tilesCantTake.includes(it.id as Tile))
+    return this.material(MaterialType.Tile)
+      .location(LocationType.TilesPile)
+      .filter((it) => !tilesCantTake.includes(it.id as Tile))
   }
 }

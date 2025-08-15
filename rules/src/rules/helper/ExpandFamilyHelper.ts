@@ -34,7 +34,10 @@ export class ExpandFamilyHelper extends MaterialRulesPart {
 
     const tilesInGameForThisFamily = this.playerTilesInGame.filter((item) => item.location.id === move.location.id)
     const tileIsFromRack = this.material(MaterialType.Tile).index(move.itemIndex).getItem()?.location.type === LocationType.PlayerTilesInRack
-    const nothingTileInThisLocation = this.material(MaterialType.Tile).location(loc => loc.type === move.location.type && loc.id === move.location.id && loc.x === move.location.x).player(move.location.player).length === 0
+    const nothingTileInThisLocation =
+      this.material(MaterialType.Tile)
+        .location((loc) => loc.type === move.location.type && loc.id === move.location.id && loc.x === move.location.x)
+        .player(move.location.player).length === 0
     return (
       move.location.type === LocationType.PlayerTilesInGame &&
       move.location.player === this.player &&

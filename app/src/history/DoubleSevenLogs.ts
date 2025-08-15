@@ -5,19 +5,20 @@ import { ExpandFamilyHelper } from '@gamepark/double-seven/rules/helper/ExpandFa
 import { StartFamilyHelper } from '@gamepark/double-seven/rules/helper/StartFamilyHelper'
 import { RuleId } from '@gamepark/double-seven/rules/RuleId'
 import { LogDescription, MoveComponentContext, MovePlayedLogDescription } from '@gamepark/react-game'
-import { isMoveItem, MaterialMove } from '@gamepark/rules-api'
+import { isMoveItem, MaterialGame, MaterialMove } from '@gamepark/rules-api'
 import { DiscardTileHistory } from './components/DiscardTileHistory'
 import { ExchangeFamilyHistory } from './components/ExchangeFamilyHistory'
 import { ExpandFamilyHistory } from './components/ExpandFamilyHistory'
 import { FlipTileHistory } from './components/FlipTileHistory'
 import { GetDoubleSevenTokenHistory } from './components/GetDoubleSevenTokenHistory'
-import { GetJockerHistory } from './components/GetJockerHistory'
+import { GetJokerHistory } from './components/GetJokerHistory'
 import { GetSevenTokenHistory } from './components/GetSevenTokenHistory'
 import { StartFamilyHistory } from './components/StartFamilyHistory'
 
 export class DoubleSevenLogs implements LogDescription {
   getMovePlayedLogDescription(move: MaterialMove, context: MoveComponentContext): MovePlayedLogDescription | undefined {
-    const ruleId: RuleId = context.game.rule.id
+    const game = context.game as MaterialGame
+    const ruleId: RuleId | undefined = game.rule?.id
     const actionPlayer = context.action.playerId
     if (ruleId === RuleId.FlipTile && this.getMoveLocationType(move) === LocationType.TilesPile) {
       return {
@@ -44,24 +45,24 @@ export class DoubleSevenLogs implements LogDescription {
       }
     }
     if (isMoveItem(move) && this.getMoveLocationType(move) === LocationType.PlayerTilesInRack) {
-      const movedTile = context.game.items[MaterialType.Tile][move.itemIndex]
-      const isJocker = movedTile.id === Tile.JokerTile
+      const movedTile = game.items[MaterialType.Tile]![move.itemIndex]
+      const isJoker = movedTile.id === Tile.JokerTile
       const isNotFromTilePile = movedTile.location.id !== LocationType.TilesPile
-      if (isJocker && isNotFromTilePile) {
+      if (isJoker && isNotFromTilePile) {
         return {
-          Component: GetJockerHistory,
+          Component: GetJokerHistory,
           player: actionPlayer
         }
       }
     }
     if (ruleId === RuleId.DoActions && this.getMoveLocationType(move) === LocationType.PlayerTilesInGame) {
       if (isMoveItem(move) && move.location.player === actionPlayer) {
-        if (new StartFamilyHelper(context.game).checkIfMoveIsStartFamilyMove(move)) {
+        if (new StartFamilyHelper(game).checkIfMoveIsStartFamilyMove(move)) {
           return {
             Component: StartFamilyHistory,
             player: actionPlayer
           }
-        } else if (new ExpandFamilyHelper(context.game).checkIfMoveIsAExpandFamilyMove(move)) {
+        } else if (new ExpandFamilyHelper(game).checkIfMoveIsAExpandFamilyMove(move)) {
           return {
             Component: ExpandFamilyHistory,
             player: actionPlayer
@@ -69,7 +70,7 @@ export class DoubleSevenLogs implements LogDescription {
         }
       }
       if (isMoveItem(move) && move.location.player !== actionPlayer && move.location.x !== undefined) {
-        const oldLocation = context.game.items[MaterialType.Tile][move.itemIndex].location.type
+        const oldLocation = game.items[MaterialType.Tile]![move.itemIndex].location.type
         if (oldLocation === LocationType.PlayerTilesInGame) {
           return {
             Component: ExchangeFamilyHistory,
