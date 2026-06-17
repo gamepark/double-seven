@@ -17,7 +17,11 @@ export class TutorialSetup extends DoubleSevenSetup {
     this.material(MaterialType.Tile).id(Tile.PurpleTile).limit(1).moveItems({ type: LocationType.TilesDiscard })
     this.material(MaterialType.Tile).id(Tile.BlueTile).limit(1).moveItems({ type: LocationType.TilesDiscard })
     this.material(MaterialType.Tile).id(Tile.GreyTile).limit(3).moveItems({ type: LocationType.TilesDiscard })
-    this.material(MaterialType.Tile).id(Tile.JokerTile).limit(1).moveItems({ type: LocationType.TilesDiscard })
+    // Isolate *every* joker: the opponent draws from the bottom of the shuffled pile (min x), and a joker
+    // in its rack makes "start a family" branch into the StartFamily rule (choose red or joker). That extra
+    // choice is not in the tutorial script, so the opponent would deadlock ("did not return any move to play").
+    // The draw order below puts a single joker back on top for the player's own scripted draw.
+    this.material(MaterialType.Tile).id(Tile.JokerTile).moveItems({ type: LocationType.TilesDiscard })
     // Shuffle the other tiles
     this.material(MaterialType.Tile).location(LocationType.TilesPile).shuffle()
     // Put back the tiles we want to draw on top
