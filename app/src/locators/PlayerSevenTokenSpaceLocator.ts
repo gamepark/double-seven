@@ -12,6 +12,10 @@ class PlayerSevenTokenSpaceLocator extends ListLocator {
     return { x: x - 7, y: y + 7 }
   }
 
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return context.rules.players.length
+  }
+
   navigationSorts = []
 }
 

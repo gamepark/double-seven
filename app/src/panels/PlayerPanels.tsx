@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { LocationType } from '@gamepark/double-seven/material/LocationType'

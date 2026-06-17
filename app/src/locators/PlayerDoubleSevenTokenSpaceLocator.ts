@@ -8,6 +8,10 @@ class PlayerDoubleSevenTokenSpaceLocator extends Locator {
     return { x: x + 10, y: y + 7 }
   }
 
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return context.rules.players.length
+  }
+
   navigationSorts = []
 }
 

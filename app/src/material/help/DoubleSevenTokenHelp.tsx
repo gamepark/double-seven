@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { Trans, useTranslation } from 'react-i18next'
 
 const components = {
@@ -13,7 +12,7 @@ export const DoubleSevenTokenHelp = () => {
     <>
       <h2>{t(`help.double.seven.token`)}</h2>
       <p>
-        <Trans defaults="help.double.seven.token.description" components={components} />
+        <Trans i18nKey="help.double.seven.token.description" components={components} />
       </p>
     </>
   )

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { Tile } from '@gamepark/double-seven/material/Tile'
@@ -26,7 +25,7 @@ export const ExchangeFamilyHistory = (props: MoveComponentProps<MoveItem>) => {
   const otherColor = othersTiles.length > 0 ? othersTiles[0].id : tile.id
 
   return (
-    <Trans defaults="history.exchange.family" values={{ player: name, color: tile.id, otherColor, otherName }}>
+    <Trans i18nKey="history.exchange.family" values={{ player: name, color: tile.id, otherColor, otherName }}>
       <PlayMoveButton move={displayMaterialHelp(MaterialType.Tile, tile)} transient />
     </Trans>
   )

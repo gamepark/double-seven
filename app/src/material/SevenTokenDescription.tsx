@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { CardDescription } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'

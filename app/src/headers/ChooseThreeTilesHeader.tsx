@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
@@ -11,8 +10,8 @@ export const ChooseThreeTilesHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans defaults="header.choose.tiles.you" values={{ nbTilesToGet: 3 }} />
+    return <Trans i18nKey="header.choose.tiles.you" values={{ nbTilesToGet: 3 }} />
   }
 
-  return <Trans defaults="header.choose.tiles.player" values={{ player: name, nbTilesToGet: 3 }} />
+  return <Trans i18nKey="header.choose.tiles.player" values={{ player: name, nbTilesToGet: 3 }} />
 }

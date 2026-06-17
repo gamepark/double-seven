@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
@@ -11,8 +10,8 @@ export const StartFamilyHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans defaults="header.family.you" />
+    return <Trans i18nKey="header.family.you" />
   }
 
-  return <Trans defaults="header.take.actions.player" values={{ player: name }} />
+  return <Trans i18nKey="header.take.actions.player" values={{ player: name }} />
 }

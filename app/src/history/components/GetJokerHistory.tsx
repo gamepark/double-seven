@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { MoveComponentProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
@@ -14,7 +13,7 @@ export const GetJokerHistory = (props: MoveComponentProps<MoveItem>) => {
   const tile: MaterialItem = game.items[MaterialType.Tile]![move.itemIndex]
 
   return (
-    <Trans defaults="history.get.jocker" values={{ player: name }}>
+    <Trans i18nKey="history.get.jocker" values={{ player: name }}>
       <PlayMoveButton move={displayMaterialHelp(MaterialType.Tile, tile)} transient />
     </Trans>
   )

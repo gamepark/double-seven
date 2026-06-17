@@ -1,5 +1,5 @@
 import { getEnumValues, Material, MaterialItem } from '@gamepark/rules-api'
-import { groupBy, values } from 'lodash'
+import { groupBy } from 'es-toolkit'
 
 export enum Tile {
   OrangeTile = 1,
@@ -27,5 +27,5 @@ export const getTiles = () => {
 }
 
 export const getFamilies = (playerTiles: Material): MaterialItem[][] => {
-  return values(groupBy(playerTiles.getItems(), (item: MaterialItem) => item.location.id))
+  return Object.values(groupBy(playerTiles.getItems(), (item: MaterialItem) => item.location.id))
 }

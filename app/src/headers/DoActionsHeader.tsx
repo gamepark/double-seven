@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { CustomMoveType } from '@gamepark/double-seven/rules/CustomMove'
 import { RuleId } from '@gamepark/double-seven/rules/RuleId'
@@ -20,7 +19,7 @@ export const DoActionsHeader = () => {
     if (empty) {
       return (
         <Trans
-          defaults="header.take.actions.empty"
+          i18nKey="header.take.actions.empty"
           components={{
             empty: <PlayMoveButton move={empty} />
           }}
@@ -29,7 +28,7 @@ export const DoActionsHeader = () => {
     }
     return (
       <Trans
-        defaults="header.take.actions.you"
+        i18nKey="header.take.actions.you"
         components={{
           pass: <PlayMoveButton move={pass} />,
           actions: <PlayMoveButton move={displayRulesHelp(RuleId.DoActions)} transient />
@@ -38,5 +37,5 @@ export const DoActionsHeader = () => {
     )
   }
 
-  return <Trans defaults="header.take.actions.player" values={{ player: name }} />
+  return <Trans i18nKey="header.take.actions.player" values={{ player: name }} />
 }

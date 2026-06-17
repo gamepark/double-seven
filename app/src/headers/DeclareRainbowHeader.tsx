@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { CustomMoveType } from '@gamepark/double-seven/rules/CustomMove'
 import { PlayMoveButton, useLegalMove, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
@@ -17,7 +16,7 @@ export const DeclareRainbowHeader = () => {
   if (itsMe) {
     return (
       <Trans
-        defaults="header.declare.rainbow.you"
+        i18nKey="header.declare.rainbow.you"
         components={{
           declareRainbow: <PlayMoveButton move={declareRainbow} />,
           pass: <PlayMoveButton move={pass} />
@@ -26,5 +25,5 @@ export const DeclareRainbowHeader = () => {
     )
   }
 
-  return <Trans defaults="header.declare.rainbow.player" values={{ player: name }} />
+  return <Trans i18nKey="header.declare.rainbow.player" values={{ player: name }} />
 }

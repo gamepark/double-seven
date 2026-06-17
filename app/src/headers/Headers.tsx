@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { RuleId } from '@gamepark/double-seven/rules/RuleId'
 import { ComponentType } from 'react'
 import { ChooseThreeTilesHeader } from './ChooseThreeTilesHeader'

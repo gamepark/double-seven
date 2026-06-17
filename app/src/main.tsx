@@ -1,12 +1,11 @@
-/** @jsxImportSource @emotion/react */
 import { DoubleSevenBot } from '@gamepark/double-seven/bot/DoubleSevenBot'
 import { DoubleSevenOptionsSpec } from '@gamepark/double-seven/DoubleSevenOptions'
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { DoubleSevenSetup } from '@gamepark/double-seven/DoubleSevenSetup'
-import { GameProvider, setupTranslation } from '@gamepark/react-game'
+import { GameProvider } from '@gamepark/react-game'
 import { MaterialGame } from '@gamepark/rules-api'
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { gameAnimations } from './animations/GameAnimations'
 import App from './App'
 import { RulesHelp } from './dialogs/RulesHelp'
@@ -15,12 +14,9 @@ import Background from './images/Background.jpg'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
 import { DoubleSevenScoring } from './scoring/DoubleSevenScoring'
-import translations from './translations.json'
 import { Tutorial } from './tutorial/Tutorial'
 
-setupTranslation(translations, { debug: false })
-
-ReactDOM.render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GameProvider
       game="double-seven"
@@ -39,6 +35,5 @@ ReactDOM.render(
     >
       <App />
     </GameProvider>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 )

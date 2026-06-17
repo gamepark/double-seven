@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { CardDescription } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import DoubleSevenTokenBack from '../images/Tokens/DoubleSevenTokenBack.jpg'

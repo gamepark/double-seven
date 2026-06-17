@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { MoveComponentProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
@@ -14,7 +13,7 @@ export const DiscardTileHistory = (props: MoveComponentProps) => {
   const { tile } = useGetRevealedTile(props)
 
   return (
-    <Trans defaults="history.discard.tile" values={{ player: name, color: tile.id }}>
+    <Trans i18nKey="history.discard.tile" values={{ player: name, color: tile.id }}>
       <PlayMoveButton move={displayMaterialHelp(MaterialType.Tile, tile)} transient />
     </Trans>
   )

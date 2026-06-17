@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { RuleId } from '@gamepark/double-seven/rules/RuleId'
 import { BoardDescription, MaterialContext } from '@gamepark/react-game'
@@ -9,6 +8,7 @@ import displayRulesHelp = MaterialMoveBuilder.displayRulesHelp
 export class TilesRackDescription extends BoardDescription {
   height = 6.88
   width = 19.5
+  transparency = true
 
   getStaticItems = ({ rules }: MaterialContext) => {
     const items: MaterialItem[] = []

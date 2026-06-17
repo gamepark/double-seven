@@ -1,5 +1,5 @@
 import { isMoveItemType, MaterialGame, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
-import { uniq } from 'lodash'
+import { uniq } from 'es-toolkit'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { Tile } from '../../material/Tile'

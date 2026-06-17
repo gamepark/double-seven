@@ -12,6 +12,10 @@ class TilesRackLocator extends Locator {
     return playersX[getRelativePlayerIndex(context, player)]
   }
 
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return context.rules.players.length
+  }
+
   navigationSorts = []
 }
 

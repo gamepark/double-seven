@@ -1,5 +1,5 @@
 import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
-import { uniqBy } from 'lodash'
+import { uniqBy } from 'es-toolkit'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { Tile } from '../material/Tile'
@@ -26,7 +26,7 @@ export class DeclareRainbowRule extends PlayerTurnRule {
   canDeclareRainbow(): boolean {
     const tiles = this.playerTiles.getItems()
     if (tiles.some((it) => it.id === Tile.JokerTile)) return false
-    const nbTilesGroupedByColor = uniqBy(tiles, 'id').length
+    const nbTilesGroupedByColor = uniqBy(tiles, (it) => it.id).length
     return nbTilesGroupedByColor >= 5 && nbTilesGroupedByColor === tiles.length
   }
 

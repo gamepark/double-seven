@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
@@ -28,7 +27,7 @@ export const ExpandFamilyHistory = (props: MoveComponentProps<MoveItem>) => {
   }
 
   return (
-    <Trans defaults="history.expand.family" values={{ player: name, color: tile.id }}>
+    <Trans i18nKey="history.expand.family" values={{ player: name, color: tile.id }}>
       <PlayMoveButton move={displayMaterialHelp(MaterialType.Tile, tile)} transient />
     </Trans>
   )

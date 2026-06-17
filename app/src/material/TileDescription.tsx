@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { MaterialType } from '@gamepark/double-seven/material/MaterialType'
 import { Tile } from '@gamepark/double-seven/material/Tile'

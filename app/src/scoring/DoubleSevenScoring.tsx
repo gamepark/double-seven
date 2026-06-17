@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { ScoreHelper } from '@gamepark/double-seven/rules/helper/ScoreHelper'
@@ -22,11 +21,11 @@ export class DoubleSevenScoring implements ScoringDescription {
   getScoringHeader(key: ScoringKeys) {
     switch (key) {
       case ScoringKeys.Tile:
-        return <Trans defaults="game-over.score.type.tile" />
+        return <Trans i18nKey="game-over.score.type.tile" />
       case ScoringKeys.SevenToken:
         return (
           <Trans
-            defaults="game-over.score.type.seven.token"
+            i18nKey="game-over.score.type.seven.token"
             components={{
               seven: <Picture src={SevenIcon} css={pictureCss} />
             }}
@@ -35,7 +34,7 @@ export class DoubleSevenScoring implements ScoringDescription {
       case ScoringKeys.DoubleSevenToken:
         return (
           <Trans
-            defaults="game-over.score.type.double.seven.token"
+            i18nKey="game-over.score.type.double.seven.token"
             components={{
               seven: <Picture src={SevenIcon} css={pictureCss} />
             }}
@@ -44,7 +43,7 @@ export class DoubleSevenScoring implements ScoringDescription {
       case ScoringKeys.Total:
         return (
           <div css={bold}>
-            <Trans defaults="game-over.score.type.total" />
+            <Trans i18nKey="game-over.score.type.total" />
           </div>
         )
     }
@@ -56,7 +55,7 @@ export class DoubleSevenScoring implements ScoringDescription {
       case ScoringKeys.Tile:
         return (
           <Trans
-            defaults="game-over.score.points"
+            i18nKey="game-over.score.points"
             values={{
               points: scoreHelper.getTilesScore(player)
             }}
@@ -65,7 +64,7 @@ export class DoubleSevenScoring implements ScoringDescription {
       case ScoringKeys.SevenToken:
         return (
           <Trans
-            defaults="game-over.score.points"
+            i18nKey="game-over.score.points"
             values={{
               points: scoreHelper.getSevenTokenScore(player)
             }}
@@ -74,7 +73,7 @@ export class DoubleSevenScoring implements ScoringDescription {
       case ScoringKeys.DoubleSevenToken:
         return (
           <Trans
-            defaults="game-over.score.points"
+            i18nKey="game-over.score.points"
             values={{
               points: scoreHelper.getDoubleSevenTokenScore(player)
             }}
@@ -84,7 +83,7 @@ export class DoubleSevenScoring implements ScoringDescription {
         return (
           <div css={bold}>
             <Trans
-              defaults="game-over.score.points"
+              i18nKey="game-over.score.points"
               values={{
                 points: scoreHelper.getScore(player)
               }}

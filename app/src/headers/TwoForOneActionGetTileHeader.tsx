@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
@@ -11,8 +10,8 @@ export const TwoForOneActionGetTileHeader = () => {
   const name = usePlayerName(activePlayer)
 
   if (itsMe) {
-    return <Trans defaults="header.two.for.one.get.you" />
+    return <Trans i18nKey="header.two.for.one.get.you" />
   }
 
-  return <Trans defaults="header.two.for.one.player" values={{ player: name }} />
+  return <Trans i18nKey="header.two.for.one.player" values={{ player: name }} />
 }

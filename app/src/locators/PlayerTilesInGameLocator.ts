@@ -12,6 +12,10 @@ class PlayerTilesInGameLocator extends ListLocator {
     return { x: x - 8, y: y - tileDescription.height * location.id - 10 }
   }
 
+  getPositionDependencies(_location: Location, context: MaterialContext) {
+    return context.rules.players.length
+  }
+
   navigationSorts = []
 }
 

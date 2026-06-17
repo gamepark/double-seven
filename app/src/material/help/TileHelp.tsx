@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/double-seven/material/LocationType'
 import { RuleId } from '@gamepark/double-seven/rules/RuleId'
@@ -33,16 +32,16 @@ export const TileHelp: FC<MaterialHelpProps> = (props) => {
       {isInDiscard && (
         <>
           <p>
-            <Trans defaults="help.tile.discard" components={components} css={mb0} />
+            <Trans i18nKey="help.tile.discard" components={components} css={mb0} />
           </p>
         </>
       )}
       <p>
-        <Trans defaults="help.tile.description" components={components} css={mb0} />
+        <Trans i18nKey="help.tile.description" components={components} css={mb0} />
       </p>
       <ul css={list}>
         <li css={listLine}>
-          <Trans defaults="help.tile.description.animals" components={components} />
+          <Trans i18nKey="help.tile.description.animals" components={components} />
           <Picture src={OrangeTile} css={mini} />
           <Picture src={PinkTile} css={mini} />
           <Picture src={GreenTile} css={mini} />
@@ -53,14 +52,14 @@ export const TileHelp: FC<MaterialHelpProps> = (props) => {
           <Picture src={MaroonTile} css={mini} />
         </li>
         <li>
-          <Trans defaults="help.tile.description.jocker" components={components} />
+          <Trans i18nKey="help.tile.description.jocker" components={components} />
           <Picture src={JockerTile} css={mini} />
         </li>
       </ul>
       <h3>{t(`help.tile.objectives`)}</h3>
       <p>
         <Trans
-          defaults="help.tile.objectives.description"
+          i18nKey="help.tile.objectives.description"
           components={{
             ...components,
             action: <PlayMoveButton css={linkButtonCss} move={displayRulesHelp(RuleId.DoActions)} transient />

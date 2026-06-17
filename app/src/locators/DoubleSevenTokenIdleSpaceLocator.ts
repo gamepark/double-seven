@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DeckLocator } from '@gamepark/react-game'
 
 class DoubleSevenTokenIdleSpaceLocator extends DeckLocator {

@@ -1,5 +1,5 @@
 import { MaterialGameSetup } from '@gamepark/rules-api'
-import { shuffle } from 'lodash'
+import { shuffle } from 'es-toolkit'
 import { DoubleSevenOptions } from './DoubleSevenOptions'
 import { DoubleSevenRules } from './DoubleSevenRules'
 import { LocationType } from './material/LocationType'
