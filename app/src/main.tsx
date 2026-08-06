@@ -1,5 +1,5 @@
 import { DoubleSevenBot } from '@gamepark/double-seven/bot/DoubleSevenBot'
-import { DoubleSevenOptionsSpec } from '@gamepark/double-seven/DoubleSevenOptions'
+import { DoubleSevenOptionsSpecV2 } from '@gamepark/double-seven/DoubleSevenOptions'
 import { DoubleSevenRules } from '@gamepark/double-seven/DoubleSevenRules'
 import { DoubleSevenSetup } from '@gamepark/double-seven/DoubleSevenSetup'
 import { GameProvider } from '@gamepark/react-game'
@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
     <GameProvider
       game="double-seven"
       Rules={DoubleSevenRules}
-      optionsSpec={DoubleSevenOptionsSpec}
+      optionsSpec={DoubleSevenOptionsSpecV2}
       GameSetup={DoubleSevenSetup}
       material={Material}
       tutorial={new Tutorial()}

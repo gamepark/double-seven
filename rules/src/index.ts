@@ -1,3 +1,3 @@
 export { DoubleSevenRules } from './DoubleSevenRules'
-export { DoubleSevenOptionsSpec } from './DoubleSevenOptions'
+export { DoubleSevenOptionsSpecV2 } from './DoubleSevenOptions'
 export { DoubleSevenSetup } from './DoubleSevenSetup'
